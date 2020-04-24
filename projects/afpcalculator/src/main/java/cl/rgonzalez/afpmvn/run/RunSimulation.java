@@ -11,21 +11,16 @@ import cl.rgonzalez.afpmvn.core.Storage;
 
 /**
  * BANSANDER ============================= first: [2005 7] last : [2008 2]
- *
  * SANTA MARIA ============================= first: [2005 7] last : [2008 2]
- *
  * CAPITAL ============================= first: [2008 3] last : [2015 11]
- * =============================
- *
  * MODELO ============================= first: [2010 8] last : [2015 11]
- *
  */
 public class RunSimulation {
 
     public void run() {
         try {
             Storage storage = new Storage();
-            Database db = storage.restore();
+            Database db = storage.restore(Utils.DB);
             Simulador sim = new Simulador(db);
 
             int year = 2007;

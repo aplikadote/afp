@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>AFP</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+        <!-- Demo Dependencies -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.js" type="text/javascript"></script>
+        <script>
+            Holder.addTheme("white", {
+                bg: "#fff",
+                fg: "#a7a7a7",
+                size: 10
+            });
+        </script>
+
+        <!-- keen-analysis@3 -->
+        <!--<script src="https://cdn.jsdelivr.net/npm/keen-analysis@3/dist/keen-analysis.min.js" type="text/javascript"></script>-->
+
+        <!-- keen-dataviz@3 -->
+        <link href="https://cdn.jsdelivr.net/npm/keen-dataviz@3/dist/keen-dataviz.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/keen-dataviz@3/dist/keen-dataviz.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/keen-dashboards.css" />
+
+        <!-- extras -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script th:src="@{/assets/js/vueplotly.js}"></script>
+
+    </head>
+
+    <body class="keen-dashboard">
+
+        <div th:replace="brand"></div>
+
+        <!--<div id="app" class="container grid grid-hero-sidebar">-->
+        <div id="app" class="container">
+
+            <!--<div th:replace="menu"></div>-->
+
+            <!--<div class="hero">-->
+            <div class="chart-wrapper">
+                <!--<div class="chart-title">-->
+
+                <!--</div>-->
+                <div class="chart-stage">
+                    <h3>Analisis Mensual: Comparativo AFP por Fondo</h3>
+                    Año
+                    <select v-model="selectedYear">
+                        <option v-for="year in years" :value="year" >{{year}}</option>
+                    </select>
+                    Mes
+                    <select v-model="selectedMonth">
+                        <option v-for="month in months" :value="month" >{{month}}</option>
+                    </select>
+
+                    <button v-on:click.prevent="updatePlot">Actualizar</button>
+
+                    <br><br>
+                </div>
+            </div>
+
+            <br>
+
+            <div v-for="x in plots">
+                <div class="chart-wrapper">
+                    <div class="chart-title">
+                        {{ x.plotName }}
+                    </div>
+                    <div class="chart-stage">
+                        <plotly-graph style="width:100%;height:350px;" v-bind:data="x.data" v-bind:layout="x.layout" v-bind:div-name="x.divName"></plotly-graph>
+                    </div>
+                    <div class="chart-notes">
+                        Notas
+                    </div>
+                </div>
+                <br>
+            </div>
+
+        </div>
+        <!--</div>-->
+
+        <script>
+//            var globalLayout = {
+//                showlegend: false,
+//                margin: {
+//                    l: 30,
+//                    r: 30,
+//                    b: 30,
+//                    t: 30,
+//                    pad: 4
+//                }
+//            };
+//
+//            var xArray = ['CAPITAL', 'CUPRUM', 'HABITAT', 'MODELO', 'PLANVITAL', 'PROVIDA', 'UNO', 'SISTEMA'];
+//            var yArray = [];
+//            for (i = 0; i < xArray.length; i++) {
+//                var x = Math.floor((Math.random() * 100) + 1);
+//                yArray.push(x);
+//            }
+//
+            var years = [];
+            for (i = 2005; i <= 2020; i++) {
+                years.unshift(i);
+            }
+//
+//            var plot01 = {
+//                divName: 'plot01',
+//                data: [
+//                    {
+//                        x: ["A", "B", "C"],
+//                        y: [1, 3, 1],
+//                        type: 'bar'
+//                    }
+//                ],
+//                layout: globalLayout
+//            };
+//
+//            var plot02 = {
+//                divName: 'plot02',
+//                data: [
+//                    {
+//                        x: ["A", "B", "C"],
+//                        y: [5, 3, 6],
+//                        type: 'bar'
+//                    }
+//                ],
+//                layout: globalLayout
+//            };
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    years: years,
+                    months: [],
+                    selectedYear: 2020,
+                    selectedMonth: 'Abril',
+                    plots: []
+                },
+                methods: {
+                    updatePlot: function (event) {
+                        console.log(this.selectedYear);
+//                        Plotly.newPlot('plot', [plotDataset], plotLayout);
+                    }
+                },
+                created: function () {
+                    this.updatePlot();
+                }
+            });
+
+            $.get("/files/months").done(function (data, status) {
+                console.log(data);
+                app.months = jQuery.parseJSON(data);
+            });
+            
+            $.get("/files/plots.js").done(function (data, status) {
+                console.log(data);
+                var jdata =  jQuery.parseJSON(data);
+                app.plots = jdata;
+            });
+            
+            $.get("/api/plots").done(function (data, status) {
+                console.log(data);
+//                var jdata =  jQuery.parseJSON(data);
+//                app.plots = jdata;
+            });
+
+        </script>
+    </body>
+
+</html>

@@ -3,25 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.rgonzalez.afpmvn.run;
+package cl.rgonzalez.afp.ui;
 
 import cl.rgonzalez.afpmvn.core.Afp;
 import cl.rgonzalez.afpmvn.core.Database;
 import cl.rgonzalez.afpmvn.core.Fondo;
 import cl.rgonzalez.afpmvn.core.Periodo;
-import cl.rgonzalez.afpmvn.core.Tipo;
 import cl.rgonzalez.afpmvn.core.Storage;
-import java.io.File;
+import cl.rgonzalez.afpmvn.core.Tipo;
+import cl.rgonzalez.afpmvn.run.Utils;
+import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author usuario
- */
-public class ReadDatabase {
+@RestController
+public class AppRest {
 
-    public void read() {
+    @GetMapping("/api/test")
+    public Object test() {
+        return Arrays.asList("A", "B", "C");
+    }
+
+    @GetMapping("/api/plots")
+    public Object plots() {
         Storage storage = new Storage();
         Database db = storage.restore(Utils.DB);
 
@@ -37,10 +43,7 @@ public class ReadDatabase {
                 System.out.format("  %s %s\n", afp.getName(), value);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        ReadDatabase reader = new ReadDatabase();
-        reader.read();
+        
+        return "[]";
     }
 }

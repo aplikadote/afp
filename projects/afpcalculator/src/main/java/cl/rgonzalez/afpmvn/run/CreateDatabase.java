@@ -39,11 +39,10 @@ public class CreateDatabase {
         this.df = new DecimalFormat("0.00%", dfs);
     }
 
-    public void start() throws IOException, ParseException {
-        File dir = new File(new File(".").getParentFile(), "data");
-        System.out.println(dir.getAbsolutePath());
+    public void start(File dirData, File fileDb) throws IOException, ParseException {
+        System.out.println(dirData.getAbsolutePath());
 
-        for (File file : dir.listFiles()) {
+        for (File file : dirData.listFiles()) {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
             String line = "";
             StringBuilder sb = new StringBuilder();
@@ -55,7 +54,7 @@ public class CreateDatabase {
             processJson(json);
 
             Storage storage = new Storage();
-            storage.persist(db);
+            storage.persist(fileDb, db);
         }
 
     }
@@ -116,7 +115,7 @@ public class CreateDatabase {
     public static void main(String[] args) throws ParseException {
         try {
             CreateDatabase process = new CreateDatabase();
-            process.start();
+            process.start(Utils.DATA, Utils.DB);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

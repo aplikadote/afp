@@ -19,19 +19,18 @@ import java.io.ObjectOutputStream;
  */
 public class Storage {
 
-    private File dir = new File("storage");
-    private File file = new File(dir, "afp.ser");
-
+//    private File dir = new File("storage");
+//    private File file = new File("afp.ser");
     public Storage() {
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
+//        if (!dir.exists()) {
+//            dir.mkdir();
+//        }
     }
 
-    public void persist(Database db) {
+    public void persist(File dir, Database db) {
         ObjectOutputStream stream = null;
         try {
-            stream = new ObjectOutputStream(new FileOutputStream(file));
+            stream = new ObjectOutputStream(new FileOutputStream(new File(dir, "afp.ser")));
             stream.writeObject(db);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -46,10 +45,10 @@ public class Storage {
         }
     }
 
-    public Database restore() {
+    public Database restore(File dir) {
         ObjectInputStream stream = null;
         try {
-            stream = new ObjectInputStream(new FileInputStream(file));
+            stream = new ObjectInputStream(new FileInputStream(new File(dir, "afp.ser")));
             return (Database) stream.readObject();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
