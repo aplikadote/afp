@@ -28,14 +28,14 @@ public class Database implements Serializable {
         this.nameToAfp = new HashMap<String, Afp>();
     }
     
-    public void put(String afpName, String fondoName, Periodo periodo, Tipo tipo, Double rateMonth) {
+    public void put(String afpName, String fondoName, Periodo periodo, Variable tipo, Double rateMonth) {
         Afp afp = putAfp(afpName);
         Fondo fondo = getFondo(fondoName);
         this.periodos.add(periodo);
         afp.put(fondo, periodo, tipo, rateMonth);
     }
     
-    public Double get(Afp afp, Fondo fondo, Periodo periodo, Tipo tipo) {
+    public Double get(Afp afp, Fondo fondo, Periodo periodo, Variable tipo) {
         return afp.get(fondo, periodo,  tipo);
     }
 

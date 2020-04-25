@@ -13,9 +13,12 @@ import java.io.Serializable;
  */
 public class Periodo implements Comparable<Periodo>, Serializable {
 
-    private final int year;
-    private final int month;
+    private int year;
+    private int month;
 
+    public Periodo() {
+    }
+    
     public Periodo(int year, int month) {
         this.year = year;
         this.month = month;

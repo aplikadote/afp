@@ -27,7 +27,7 @@ public class FondoData implements Serializable {
         this.mapAverageTotal = new HashMap<Periodo, Double>();
     }
 
-    public void put(Periodo periodo, Tipo tipo, Double value) {
+    public void put(Periodo periodo, Variable tipo, Double value) {
         switch (tipo) {
             case RENTAB_MENSUAL:
                 this.mapMonth.put(periodo, value);
@@ -44,7 +44,7 @@ public class FondoData implements Serializable {
         }
     }
 
-    public Double get(Periodo periodo, Tipo tipo) {
+    public Double get(Periodo periodo, Variable tipo) {
         switch (tipo) {
             case RENTAB_MENSUAL:
                 return this.mapMonth.get(periodo);

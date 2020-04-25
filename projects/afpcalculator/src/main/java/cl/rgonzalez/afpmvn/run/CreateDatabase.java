@@ -7,7 +7,7 @@ package cl.rgonzalez.afpmvn.run;
 
 import cl.rgonzalez.afpmvn.core.Periodo;
 import cl.rgonzalez.afpmvn.core.Database;
-import cl.rgonzalez.afpmvn.core.Tipo;
+import cl.rgonzalez.afpmvn.core.Variable;
 import cl.rgonzalez.afpmvn.core.Storage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -92,10 +92,10 @@ public class CreateDatabase {
                 Double rateAcumFullYear = parse(rateAcumFullYearStr);
                 Double rateAverageTotal = parse(rateAverageTotalStr);
 
-                db.put(afp, fondo, periodo, Tipo.RENTAB_MENSUAL, rateMonth);
-                db.put(afp, fondo, periodo, Tipo.RENTAB_DESDE_ENERO, rateAcumThisYear);
-                db.put(afp, fondo, periodo, Tipo.RENTAB_ULTIMOS_12_MESES, rateAcumFullYear);
-                db.put(afp, fondo, periodo, Tipo.PROMEDIO_ANUAL_DESDE_20020927, rateAverageTotal);
+                db.put(afp, fondo, periodo, Variable.RENTAB_MENSUAL, rateMonth);
+                db.put(afp, fondo, periodo, Variable.RENTAB_DESDE_ENERO, rateAcumThisYear);
+                db.put(afp, fondo, periodo, Variable.RENTAB_ULTIMOS_12_MESES, rateAcumFullYear);
+                db.put(afp, fondo, periodo, Variable.PROMEDIO_ANUAL_DESDE_20020927, rateAverageTotal);
             }
         }
     }

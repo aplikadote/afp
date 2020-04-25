@@ -27,7 +27,7 @@ public class Afp implements Serializable {
         return name;
     }
 
-    public void put(Fondo fondo, Periodo periodo, Tipo tipo, Double rate) {
+    public void put(Fondo fondo, Periodo periodo, Variable tipo, Double rate) {
         FondoData fondoData = getFondoData(fondo);
         fondoData.put(periodo, tipo, rate);
     }
@@ -41,7 +41,7 @@ public class Afp implements Serializable {
         return fondoData;
     }
 
-    public Double get(Fondo fondo, Periodo periodo, Tipo tipo) {
+    public Double get(Fondo fondo, Periodo periodo, Variable tipo) {
         FondoData data = map.get(fondo);
         return data.get(periodo, tipo);
     }

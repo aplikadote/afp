@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>AFP</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+        <!-- Demo Dependencies -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.js" type="text/javascript"></script>
+        <script>
+            Holder.addTheme("white", {
+                bg: "#fff",
+                fg: "#a7a7a7",
+                size: 10
+            });
+        </script>
+
+        <!-- keen-analysis@3 -->
+        <!--<script src="https://cdn.jsdelivr.net/npm/keen-analysis@3/dist/keen-analysis.min.js" type="text/javascript"></script>-->
+
+        <!-- keen-dataviz@3 -->
+        <link href="https://cdn.jsdelivr.net/npm/keen-dataviz@3/dist/keen-dataviz.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/keen-dataviz@3/dist/keen-dataviz.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/keen-dashboards.css" />
+
+        <!-- extras -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script th:src="@{/assets/js/vueplotly.js}"></script>
+
+    </head>
+
+    <body class="keen-dashboard">
+
+        <div th:replace="brand"></div>
+
+        <!--<div id="app" class="container grid grid-hero-sidebar">-->
+        <div id="app" class="container">
+
+            <!--<div th:replace="menu"></div>-->
+
+            <!--<div class="hero">-->
+            <div class="chart-wrapper">
+                <!--<div class="chart-title">-->
+
+                <!--</div>-->
+                <div class="chart-stage">
+                    <h3>Analisis Mensual: Comparativo AFP según Fondo</h3>
+
+                    <button v-on:click.prevent="previousPlot"><</button>
+                    Año
+                    <select v-model="selectedYear"  v-on:change="onChangeYear">
+                        <option v-for="year in years" :value="year" >{{year.name}}</option>
+                    </select>
+                    Mes
+                    <select v-model="selectedMonth" v-on:change="onChangeMonth">
+                        <option v-for="month in months" :value="month" >{{month.name}}</option>
+                    </select>
+
+                    <!--<button v-on:click.prevent="updatePlot">Actualizar</button>-->
+                    <button v-on:click.prevent="nextPlot">></button>
+
+                    <!--{{ message }} - {{ selectedYear }} - {{ selectedMonth }}-->
+                    <br><br>
+                </div>
+            </div>
+
+            <br>
+
+            <div v-if="plots.length > 0">
+                <div class="chart-wrapper">
+                    <div class="chart-stage">
+                        {{ selectedMonth.name }} de {{ selectedYear.name }} 
+                    </div>
+                </div>
+                <div class="grid grid-simple-col-2" >
+
+                    <div class="chart-wrapper" v-for="x in plots">
+                        <!--                    <div class="chart-title">
+                                                {{ x.plotName }}
+                                            </div>-->
+                        <div class="chart-stage">
+                            <plotly-graph style="width:100%;height:200px;" v-bind:data="x.data" v-bind:layout="x.layout" v-bind:div-name="x.divName"></plotly-graph>
+                        </div>
+                        <!--                    <div class="chart-notes">
+                                                Notas
+                                            </div>-->
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div v-else>
+                <div class="chart-wrapper">
+                    <div class="chart-stage">
+                        {{ selectedMonth.name }} de {{ selectedYear.name }} : Sin datos
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--</div>-->
+
+        <script th:src="@{/assets/js/utils.js}"></script>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'qwe',
+                    years: [],
+                    months: [],
+                    selectedYear: {},
+                    selectedMonth: {},
+                    plots: []
+                },
+                methods: {
+                    updatePlot: function (event) {
+                        var requestData = {year: this.selectedYear.id, month: this.selectedMonth.id};
+//                        console.log(jdata);
+                        post("/api/update", requestData, (data) => {
+                            if (data.containsData) {
+                                this.plots = data.plots;
+                            } else {
+                                this.plots = [];
+                            }
+                        });
+                    },
+                    nextPlot: function (event) {
+                        post("/api/next", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                            if (data.containsData) {
+                                this.plots = data.plots;
+                                this.selectedYear = data.selectedYear;
+                                this.selectedMonth = data.selectedMonth;
+                            } else {
+                                this.plots = [];
+                            }
+                        });
+                    },
+                    previousPlot: function (event) {
+                        post("/api/previous", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                            if (data.containsData) {
+                                this.plots = data.plots;
+                                this.selectedYear = data.selectedYear;
+                                this.selectedMonth = data.selectedMonth;
+                            } else {
+                                this.plots = [];
+                            }
+                        });
+                    },
+                    onChangeMonth: function (event) {
+                        this.updatePlot(event);
+                    },
+                    onChangeYear: function (event) {
+                        this.updatePlot(event);
+                    }
+                },
+                created: function () {
+                    $.get("/api/init").done((data) => {
+                        this.years = data.years;
+                        this.months = data.months;
+                        this.selectedYear = data.selectedYear;
+                        this.selectedMonth = data.selectedMonth;
+                        this.plots = data.plots;
+                    });
+                }
+            });
+
+        </script>
+    </body>
+
+</html>

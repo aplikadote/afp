@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AppController {
     
-    @RequestMapping("/")
-    public String analisisPorFondo() {
-        return "analisisPorFondo";
-    }
+//    @RequestMapping("/")
+//    public String analisisPorFondo() {
+//        return "analisisPorFondo";
+//    }
     
     @RequestMapping("/analisisPorAFP")
     public String analisisPorAFP() {

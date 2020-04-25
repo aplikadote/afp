@@ -5,11 +5,13 @@
  */
 package cl.rgonzalez.afp.ui;
 
+import cl.rgonzalez.afpmvn.core.Database;
+import cl.rgonzalez.afpmvn.core.Storage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @SpringBootApplication
 public class App {
@@ -22,5 +24,10 @@ public class App {
     private void applicationReadyEvent() {
         new BrowserRunner().run();
     }
-    
+
+    @Bean
+    public Database bean001() {
+        Storage st = new Storage();
+        return st.restore();
+    }
 }

@@ -6,6 +6,7 @@
 package cl.rgonzalez.afpmvn.core;
 
 import cl.rgonzalez.afpmvn.core.Database;
+import cl.rgonzalez.afpmvn.run.Utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -43,6 +44,10 @@ public class Storage {
                 }
             }
         }
+    }
+    
+    public Database restore() {
+        return restore(Utils.DB);
     }
 
     public Database restore(File dir) {

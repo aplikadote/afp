@@ -9,7 +9,7 @@ package cl.rgonzalez.afpmvn.core;
  *
  * @author usuario
  */
-public enum Tipo {
+public enum Variable {
 
     RENTAB_MENSUAL, RENTAB_DESDE_ENERO, RENTAB_ULTIMOS_12_MESES, PROMEDIO_ANUAL_DESDE_20020927;
 

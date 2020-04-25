@@ -11,7 +11,7 @@ Vue.component('plotly-graph', {
     mounted() {
         this.Plot();
 //        $('#' + this.divId).on('plotly_hover', this.hover);
-//        this.$watch('data', this.Plot, {deep: true});
+        this.$watch('data', this.Plot, {deep: true});
 //        $(window).bind('resize', this.onResize);
     },
     beforeDestroy() {

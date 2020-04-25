@@ -30,7 +30,7 @@ public class Simulador {
 //        iterator.next();
         while (iterator.hasNext()) {
             Periodo periodo = iterator.next();
-            Double rate = db.get(afp, fondo, periodo, Tipo.RENTAB_MENSUAL);
+            Double rate = db.get(afp, fondo, periodo, Variable.RENTAB_MENSUAL);
             bote += cotizacion;
             bote += bote * rate;
 
