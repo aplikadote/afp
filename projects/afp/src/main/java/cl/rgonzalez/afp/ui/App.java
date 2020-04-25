@@ -20,10 +20,10 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-    @EventListener({ApplicationReadyEvent.class})
-    private void applicationReadyEvent() {
-        new BrowserRunner().run();
-    }
+//    @EventListener({ApplicationReadyEvent.class})
+//    private void applicationReadyEvent() {
+//        new BrowserRunner().run();
+//    }
 
     @Bean
     public Database bean001() {

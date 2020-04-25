@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
 public class BrowserRunner {
 
     public void run() {
-        run("http://localhost:8080");
+        run("http://localhost:8081");
     }
 
     public void run(String url) {

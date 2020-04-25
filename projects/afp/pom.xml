@@ -35,9 +35,9 @@
         </dependency>
         
         <dependency>
-            <groupId>cl.rgonzalez</groupId>
+            <groupId>cl.rgonzalez.afp</groupId>
             <artifactId>afpcalculator</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         
     </dependencies>
