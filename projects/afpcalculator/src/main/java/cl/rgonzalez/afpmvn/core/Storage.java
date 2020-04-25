@@ -5,7 +5,6 @@
  */
 package cl.rgonzalez.afpmvn.core;
 
-import cl.rgonzalez.afpmvn.core.Database;
 import cl.rgonzalez.afpmvn.run.Utils;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,12 +19,7 @@ import java.io.ObjectOutputStream;
  */
 public class Storage {
 
-//    private File dir = new File("storage");
-//    private File file = new File("afp.ser");
     public Storage() {
-//        if (!dir.exists()) {
-//            dir.mkdir();
-//        }
     }
 
     public void persist(File dir, Database db) {
