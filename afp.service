@@ -1,0 +1,10 @@
+[Unit]
+Description=AFP
+After=syslog.target
+ 
+[Service]
+User=guru
+ExecStart=/home/guru/trabajo/afp/projects/afp/target/afp.jar SuccessExitStatus=143 
+ 
+[Install] 
+WantedBy=multi-user.target
