@@ -1,5 +1,5 @@
 [Unit]
-Description=AFP
+Description=afp
 After=syslog.target
  
 [Service]
