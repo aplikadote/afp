@@ -1,8 +1,6 @@
 NAME=afp
 echo ---------------------------------------
-echo INSTALACION
-echo Proyecto '$NAME'
-echo Directorio: $DIR
+echo INSTALACION PROYECTO: $NAME
 echo ---------------------------------------
 
 sudo service $NAME stop
