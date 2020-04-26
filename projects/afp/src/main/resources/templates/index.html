@@ -112,7 +112,7 @@
         <script th:src="@{/assets/js/utils.js}"></script>
         <script>
             window.addEventListener('DOMContentLoaded', toggleMenu);
-            
+
             var app = new Vue({
                 el: '#app',
                 data: {
@@ -126,7 +126,7 @@
                     updatePlot: function (event) {
                         var requestData = {year: this.selectedYear.id, month: this.selectedMonth.id};
 //                        console.log(jdata);
-                        post("/api/fondo/update", requestData, (data) => {
+                        post(getCtx() + "/api/fondo/update", requestData, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                             } else {
@@ -135,7 +135,7 @@
                         });
                     },
                     next: function (event) {
-                        post("/api/fondo/next", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                        post(getCtx() + "/api/fondo/next", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                                 this.selectedYear = data.selectedYear;
@@ -146,7 +146,7 @@
                         });
                     },
                     previous: function (event) {
-                        post("/api/fondo/previous", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                        post(getCtx() + "/api/fondo/previous", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                                 this.selectedYear = data.selectedYear;
@@ -164,7 +164,7 @@
                     }
                 },
                 created: function () {
-                    $.get("/api/fondo/init").done((data) => {
+                    $.get(getCtx() + "/api/fondo/init").done((data) => {
                         this.years = data.years;
                         this.months = data.months;
                         this.selectedYear = data.selectedYear;

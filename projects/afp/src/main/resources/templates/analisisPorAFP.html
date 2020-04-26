@@ -127,7 +127,7 @@
                     updatePlot: function (event) {
                         var requestData = {year: this.selectedYear.id, month: this.selectedMonth.id};
 //                        console.log(jdata);
-                        post("/api/afp/update", requestData, (data) => {
+                        post(getCtx() + "/api/afp/update", requestData, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                             } else {
@@ -136,7 +136,7 @@
                         });
                     },
                     nextPlot: function (event) {
-                        post("/api/afp/next", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                        post(getCtx() + "/api/afp/next", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                                 this.selectedYear = data.selectedYear;
@@ -147,7 +147,7 @@
                         });
                     },
                     previousPlot: function (event) {
-                        post("/api/afp/previous", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                        post(getCtx() + "/api/afp/previous", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                                 this.selectedYear = data.selectedYear;
@@ -165,7 +165,7 @@
                     }
                 },
                 created: function () {
-                    $.get("/api/afp/init").done((data) => {
+                    $.get(getCtx() + "/api/afp/init").done((data) => {
                         this.years = data.years;
                         this.months = data.months;
                         this.selectedYear = data.selectedYear;
