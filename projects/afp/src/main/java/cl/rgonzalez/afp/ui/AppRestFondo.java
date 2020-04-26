@@ -32,7 +32,7 @@ public class AppRestFondo {
 
     @GetMapping("/api/fondo/init")
     public Object init() {
-        
+
         Calendar c = Calendar.getInstance();
         c.add(Calendar.MONTH, -1);
         int year = c.get(Calendar.YEAR);
@@ -82,7 +82,7 @@ public class AppRestFondo {
 
     @PostMapping(path = "/api/fondo/previous", consumes = "application/json", produces = "application/json")
     public Object previous(@RequestBody Periodo actual) {
-       Periodo next = services.getPrevious(actual);
+        Periodo next = services.getPrevious(actual);
         Map<String, Object> data = new HashMap<>();
         if (next != null) {
             data.put("containsData", true);
@@ -146,7 +146,7 @@ public class AppRestFondo {
 
         Map<String, Object> yaxis = new HashMap<>();
         yaxis.put("tickformat", ",.2%");
-        
+
         Map<String, Object> font = new HashMap<>();
         font.put("size", 9);
 
@@ -157,11 +157,15 @@ public class AppRestFondo {
         layout.put("yaxis", yaxis);
         layout.put("font", font);
 
+        Map<String, Object> options = new HashMap<>();
+        options.put("staticPlot", true);
+
         Map<String, Object> plotFondoA = new HashMap<>();
         plotFondoA.put("divName", "fondo_" + fondo.name());
         plotFondoA.put("plotName", "Fondo " + fondo.name());
         plotFondoA.put("data", plotArray);
         plotFondoA.put("layout", layout);
+        plotFondoA.put("options", options);
 
         return plotFondoA;
     }

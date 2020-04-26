@@ -10,9 +10,7 @@ import cl.rgonzalez.afpmvn.core.Database;
 import cl.rgonzalez.afpmvn.core.Fondo;
 import cl.rgonzalez.afpmvn.core.Periodo;
 import cl.rgonzalez.afpmvn.core.Variable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -158,11 +156,15 @@ public class AppRestAfp {
         layout.put("yaxis", yaxis);
         layout.put("font", font);
 
+        Map<String, Object> options = new HashMap<>();
+        options.put("staticPlot", true);
+        
         Map<String, Object> plotFondoA = new HashMap<>();
         plotFondoA.put("divName", "fondo_" + afp.getName());
         plotFondoA.put("plotName", "Fondo " + afp.getName());
         plotFondoA.put("data", plotArray);
         plotFondoA.put("layout", layout);
+        plotFondoA.put("options", options);
 
         return plotFondoA;
     }

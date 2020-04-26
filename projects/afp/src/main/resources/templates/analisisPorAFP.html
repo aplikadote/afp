@@ -83,7 +83,14 @@
                                                 {{ x.plotName }}
                                             </div>-->
                         <div class="chart-stage">
-                            <plotly-graph style="width:100%;height:200px;" v-bind:data="x.data" v-bind:layout="x.layout" v-bind:div-name="x.divName"></plotly-graph>
+                            <plotly-graph 
+                                style="width:100%;height:200px;" 
+                                v-bind:data="x.data" 
+                                v-bind:layout="x.layout" 
+                                v-bind:options="x.options" 
+                                v-bind:div-name="x.divName"
+                                >
+                            </plotly-graph>
                         </div>
                         <!--                    <div class="chart-notes">
                                                 Notas
@@ -106,7 +113,7 @@
         <script th:src="@{/assets/js/utils.js}"></script>
         <script>
             window.addEventListener('DOMContentLoaded', toggleMenu);
-            
+
             var app = new Vue({
                 el: '#app',
                 data: {
