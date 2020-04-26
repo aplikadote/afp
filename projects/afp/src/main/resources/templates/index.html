@@ -48,9 +48,9 @@
 
                 <!--</div>-->
                 <div class="chart-stage">
-                    <h3>Analisis Mensual: Comparativo AFP según Fondo</h3>
+                    <h3>Analisis Mensual: Comparativo por Fondos</h3>
 
-                    <button v-on:click.prevent="previousPlot"><</button>
+                    <button v-on:click.prevent="previous"><</button>
                     Año
                     <select v-model="selectedYear"  v-on:change="onChangeYear">
                         <option v-for="year in years" :value="year" >{{year.name}}</option>
@@ -61,7 +61,7 @@
                     </select>
 
                     <!--<button v-on:click.prevent="updatePlot">Actualizar</button>-->
-                    <button v-on:click.prevent="nextPlot">></button>
+                    <button v-on:click.prevent="next">></button>
 
                     <!--{{ message }} - {{ selectedYear }} - {{ selectedMonth }}-->
                     <br><br>
@@ -105,10 +105,11 @@
 
         <script th:src="@{/assets/js/utils.js}"></script>
         <script>
+            window.addEventListener('DOMContentLoaded', toggleMenu);
+            
             var app = new Vue({
                 el: '#app',
                 data: {
-                    message: 'qwe',
                     years: [],
                     months: [],
                     selectedYear: {},
@@ -119,7 +120,7 @@
                     updatePlot: function (event) {
                         var requestData = {year: this.selectedYear.id, month: this.selectedMonth.id};
 //                        console.log(jdata);
-                        post("/api/update", requestData, (data) => {
+                        post("/api/fondo/update", requestData, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                             } else {
@@ -127,8 +128,8 @@
                             }
                         });
                     },
-                    nextPlot: function (event) {
-                        post("/api/next", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                    next: function (event) {
+                        post("/api/fondo/next", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                                 this.selectedYear = data.selectedYear;
@@ -138,8 +139,8 @@
                             }
                         });
                     },
-                    previousPlot: function (event) {
-                        post("/api/previous", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                    previous: function (event) {
+                        post("/api/fondo/previous", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                                 this.selectedYear = data.selectedYear;
@@ -157,7 +158,7 @@
                     }
                 },
                 created: function () {
-                    $.get("/api/init").done((data) => {
+                    $.get("/api/fondo/init").done((data) => {
                         this.years = data.years;
                         this.months = data.months;
                         this.selectedYear = data.selectedYear;

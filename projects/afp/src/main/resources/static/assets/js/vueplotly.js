@@ -22,7 +22,7 @@ Vue.component('plotly-graph', {
 //            this.$emit('hover', eventData.points, this.divId);
 //        },
         Plot() {
-            return Plotly.newPlot(this.divName, this.data, this.layout);
+            return Plotly.newPlot(this.divName, this.data, this.layout, {staticPlot: true});
         },
 //        onResize() {
 //            if (this.resize) {
