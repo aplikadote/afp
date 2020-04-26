@@ -1,4 +1,3 @@
-DIR=projects/afp
 NAME=afp
 echo ---------------------------------------
 echo INSTALACION
@@ -8,5 +7,6 @@ echo ---------------------------------------
 
 sudo service $NAME stop
 git pull origin master
-mvn -f $DIR clean package
+mvn -f projects/afpcalculator clean install
+mvn -f projects/afp clean package
 sudo service $NAME start
