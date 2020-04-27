@@ -48,22 +48,20 @@
 
                 <!--</div>-->
                 <div class="chart-stage">
-                    <h3>Analisis Mensual: Comparativo por Fondos</h3>
+                    <h3>Analisis Anual por AFP</h3>
 
                     <button v-on:click.prevent="previous"><</button>
                     Año
                     <select v-model="selectedYear"  v-on:change="onChangeYear">
                         <option v-for="year in years" :value="year" >{{year.name}}</option>
                     </select>
-                    Mes
-                    <select v-model="selectedMonth" v-on:change="onChangeMonth">
-                        <option v-for="month in months" :value="month" >{{month.name}}</option>
+                    <button v-on:click.prevent="next">></button>
+                    &nbsp;
+                    Fondo
+                    <select v-model="selectedFondo" v-on:change="onChangeFondo">
+                        <option v-for="fondo in fondos" :value="fondo" >{{fondo.name}}</option>
                     </select>
 
-                    <!--<button v-on:click.prevent="updatePlot">Actualizar</button>-->
-                    <button v-on:click.prevent="next">></button>
-
-                    <!--{{ message }} - {{ selectedYear }} - {{ selectedMonth }}-->
                     <br><br>
                 </div>
             </div>
@@ -73,35 +71,36 @@
             <div v-if="plots.length > 0">
                 <div class="chart-wrapper">
                     <div class="chart-stage">
-                        {{ selectedMonth.name }} de {{ selectedYear.name }} 
+                        {{ selectedYear.name }} - Fondo {{ selectedFondo.name }} 
                     </div>
                 </div>
-                <div class="grid grid-simple-col-2" >
+                <!--<div class="grid grid-thirds" >-->
 
-                    <div class="chart-wrapper" v-for="x in plots">
-                        <!--                    <div class="chart-title">
-                                                {{ x.plotName }}
-                                            </div>-->
-                        <div class="chart-stage">
-                            <plotly-graph 
-                                style="width:100%;height:200px;"
-                                v-bind:data="x.data"
-                                v-bind:layout="x.layout"
-                                v-bind:options="x.options"
-                                v-bind:div-name="x.divName">
-                            </plotly-graph>
-                        </div>
-                        <!--                    <div class="chart-notes">
-                                                Notas
-                                            </div>-->
+                <div class="chart-wrapper" v-for="x in plots">
+                    <!--                    <div class="chart-title">
+                                            {{ x.plotName }}
+                                        </div>-->
+                    <div class="chart-stage">
+                        <plotly-graph 
+                            style="width:100%;height:280px;" 
+                            v-bind:data="x.data" 
+                            v-bind:layout="x.layout" 
+                            v-bind:options="x.options" 
+                            v-bind:div-name="x.divName"
+                            >
+                        </plotly-graph>
                     </div>
-                    <br>
+                    <!--                    <div class="chart-notes">
+                                            Notas
+                                        </div>-->
                 </div>
+                <br>
+                <!--</div>-->
             </div>
             <div v-else>
                 <div class="chart-wrapper">
                     <div class="chart-stage">
-                        {{ selectedMonth.name }} de {{ selectedYear.name }} : Sin datos
+                        {{ selectedYear.name }} - Fondo {{ selectedFondo.name }}  : Sin datos
                     </div>
                 </div>
             </div>
@@ -116,17 +115,28 @@
             var app = new Vue({
                 el: '#app',
                 data: {
+                    serv: getCtx() + "/api/anual/afp/",
                     years: [],
-                    months: [],
+                    fondos: [],
                     selectedYear: {},
-                    selectedMonth: {},
+                    selectedFondo: {},
                     plots: []
                 },
+                created: function () {
+                    $.get(this.serv + "init").done((data) => {
+                        this.years = data.years;
+                        this.fondos = data.fondos;
+                        this.selectedYear = data.selectedYear;
+                        this.selectedFondo = data.selectedFondo;
+                        this.plots = data.plots;
+                    });
+                },
                 methods: {
-                    updatePlot: function (event) {
-                        var requestData = {year: this.selectedYear.id, month: this.selectedMonth.id};
-//                        console.log(jdata);
-                        post(getCtx() + "/api/fondo/update", requestData, (data) => {
+                    update: function (event) {
+                        var year = this.selectedYear.id;
+                        var fondo = this.selectedFondo.id;
+                        var rdata = {year: year, fondo: fondo};
+                        post(this.serv + "update", rdata, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                             } else {
@@ -135,43 +145,39 @@
                         });
                     },
                     next: function (event) {
-                        post(getCtx() + "/api/fondo/next", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                        var year = this.selectedYear.id;
+                        var fondo = this.selectedFondo.id;
+                        var rdata = {year: year, fondo: fondo};
+                        post(getCtx() + "/api/anual/afp/next", rdata, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                                 this.selectedYear = data.selectedYear;
-                                this.selectedMonth = data.selectedMonth;
                             } else {
                                 this.plots = [];
                             }
                         });
                     },
                     previous: function (event) {
-                        post(getCtx() + "/api/fondo/previous", {year: this.selectedYear.id, month: this.selectedMonth.id}, (data) => {
+                        var year = this.selectedYear.id;
+                        var fondo = this.selectedFondo.id;
+                        var rdata = {year: year, fondo: fondo};
+                        post(getCtx() + "/api/anual/afp/previous", rdata, (data) => {
                             if (data.containsData) {
                                 this.plots = data.plots;
                                 this.selectedYear = data.selectedYear;
-                                this.selectedMonth = data.selectedMonth;
                             } else {
                                 this.plots = [];
                             }
                         });
                     },
-                    onChangeMonth: function (event) {
-                        this.updatePlot(event);
-                    },
                     onChangeYear: function (event) {
-                        this.updatePlot(event);
+                        this.update(event);
+                    },
+                    onChangeFondo: function (event) {
+                        this.update(event);
                     }
-                },
-                created: function () {
-                    $.get(getCtx() + "/api/fondo/init").done((data) => {
-                        this.years = data.years;
-                        this.months = data.months;
-                        this.selectedYear = data.selectedYear;
-                        this.selectedMonth = data.selectedMonth;
-                        this.plots = data.plots;
-                    });
                 }
+
             });
 
         </script>

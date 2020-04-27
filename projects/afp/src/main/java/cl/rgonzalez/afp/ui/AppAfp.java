@@ -11,24 +11,18 @@ import java.util.Objects;
  *
  * @author aplik
  */
-public class Year implements Comparable<Year> {
+public class AppAfp implements Comparable<AppAfp> {
 
-    public static final Year EMPTY = new Year();
-    //
+    public static final AppAfp EMPTY = new AppAfp();
     private int id;
     private String name;
 
-    public Year() {
+    public AppAfp() {
         this.id = -1;
         this.name = "";
     }
-    
-    public Year(int id) {
-       this.id= id;
-       this.name = Integer.toString(id);
-    }
 
-    public Year(int id, String name) {
+    public AppAfp(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -46,11 +40,11 @@ public class Year implements Comparable<Year> {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Year)) {
+        if (!(obj instanceof AppYear)) {
             return false;
         }
 
-        return id == ((Year) obj).getId();
+        return id == ((AppYear) obj).getId();
     }
 
     @Override
@@ -59,8 +53,7 @@ public class Year implements Comparable<Year> {
     }
 
     @Override
-    public int compareTo(Year o) {
+    public int compareTo(AppAfp o) {
         return id - o.id;
     }
-
 }

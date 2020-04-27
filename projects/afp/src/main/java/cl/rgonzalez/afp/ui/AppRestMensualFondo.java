@@ -20,17 +20,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class AppRestFondo {
+@RestController()
+@RequestMapping("/api/mensual/fondo")
+public class AppRestMensualFondo {
 
     @Autowired
     private Database db;
     @Autowired
     private AppServices services;
 
-    @GetMapping("/api/fondo/init")
+    @GetMapping("init")
     public Object init() {
 
         Calendar c = Calendar.getInstance();
@@ -41,15 +43,15 @@ public class AppRestFondo {
         Periodo periodo = new Periodo(year, month);
 
         Map<String, Object> data = new HashMap<>();
-        data.put("years", services.getYears());
-        data.put("months", services.getMonths());
+        data.put("years", services.getAppYears());
+        data.put("months", services.getAppMonths());
         data.put("selectedYear", services.getYear(year));
         data.put("selectedMonth", services.getMonth(month));
         data.put("plots", createAllPlots(periodo));
         return data;
     }
 
-    @PostMapping(path = "/api/fondo/update", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "update", consumes = "application/json", produces = "application/json")
     public Object update(@RequestBody Periodo periodo) {
         Map<String, Object> data = new HashMap<>();
         if (db.getPeriodos().contains(periodo)) {
@@ -62,38 +64,38 @@ public class AppRestFondo {
         return data;
     }
 
-    @PostMapping(path = "/api/fondo/next", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "next", consumes = "application/json", produces = "application/json")
     public Object next(@RequestBody Periodo actual) {
-        Periodo next = services.getNext(actual);
+        Periodo next = services.getNextPeriodo(actual);
         Map<String, Object> data = new HashMap<>();
         if (next != null) {
             data.put("containsData", true);
             data.put("plots", createAllPlots(next));
-            data.put("selectedYear", new Year(next.getYear()));
+            data.put("selectedYear", new AppYear(next.getYear()));
             data.put("selectedMonth", services.getMonth(next.getMonth()));
         } else {
             data.put("containsData", false);
             data.put("plots", Collections.EMPTY_LIST);
-            data.put("selectedYear", Year.EMPTY);
-            data.put("selectedMonth", Month.EMPTY);
+            data.put("selectedYear", AppYear.EMPTY);
+            data.put("selectedMonth", AppMonth.EMPTY);
         }
         return data;
     }
 
-    @PostMapping(path = "/api/fondo/previous", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "previous", consumes = "application/json", produces = "application/json")
     public Object previous(@RequestBody Periodo actual) {
-        Periodo next = services.getPrevious(actual);
+        Periodo next = services.getPreviousPeriodo(actual);
         Map<String, Object> data = new HashMap<>();
         if (next != null) {
             data.put("containsData", true);
             data.put("plots", createAllPlots(next));
-            data.put("selectedYear", new Year(next.getYear()));
+            data.put("selectedYear", new AppYear(next.getYear()));
             data.put("selectedMonth", services.getMonth(next.getMonth()));
         } else {
             data.put("containsData", false);
             data.put("plots", Collections.EMPTY_LIST);
-            data.put("selectedYear", Year.EMPTY);
-            data.put("selectedMonth", Month.EMPTY);
+            data.put("selectedYear", AppYear.EMPTY);
+            data.put("selectedMonth", AppMonth.EMPTY);
         }
         return data;
     }

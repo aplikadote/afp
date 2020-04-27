@@ -11,18 +11,18 @@ import java.util.Objects;
  *
  * @author aplik
  */
-public class Month implements Comparable<Month> {
+public class AppMonth implements Comparable<AppMonth> {
 
-    public static final Month EMPTY = new Month();
+    public static final AppMonth EMPTY = new AppMonth();
     private int id;
     private String name;
 
-    public Month() {
+    public AppMonth() {
         this.id = -1;
         this.name = "";
     }
 
-    public Month(int id, String name) {
+    public AppMonth(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -40,11 +40,11 @@ public class Month implements Comparable<Month> {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof Year)) {
+        if (!(obj instanceof AppYear)) {
             return false;
         }
 
-        return id == ((Year) obj).getId();
+        return id == ((AppYear) obj).getId();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Month implements Comparable<Month> {
     }
 
     @Override
-    public int compareTo(Month o) {
+    public int compareTo(AppMonth o) {
         return id - o.id;
     }
 }

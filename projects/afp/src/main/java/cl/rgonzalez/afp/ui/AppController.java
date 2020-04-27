@@ -11,13 +11,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AppController {
     
-//    @RequestMapping("/")
-//    public String analisisPorFondo() {
-//        return "analisisPorFondo";
-//    }
+    @RequestMapping("/")
+    public String analisisMensualFondo() {
+        return "analisisMensualFondo";
+    }
     
-    @RequestMapping("/analisisPorAFP")
-    public String analisisPorAFP() {
-        return "analisisPorAFP";
+    @RequestMapping("/analisisMensualAfp")
+    public String analisisMensualAfp() {
+        return "analisisMensualAfp";
+    }
+    
+    @RequestMapping("/analisisAnualFondo")
+    public String analisisAnualFondo() {
+        return "analisisAnualFondo";
+    }
+    
+    @RequestMapping("/analisisAnualAfp")
+    public String analisisAnualAfp() {
+        return "analisisAnualAfp";
     }
 }
