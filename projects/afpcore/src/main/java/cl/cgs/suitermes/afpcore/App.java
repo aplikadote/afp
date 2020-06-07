@@ -13,10 +13,10 @@ public class App {
     }
 
     @Bean
-    public CommandLineRunner demo() {
+    public CommandLineRunner demo(AppService service) {
         return (args) -> {
             System.out.println("oliwi");
-            System.out.println("mas oliwi");
+            service.process();
         };
     }
 
