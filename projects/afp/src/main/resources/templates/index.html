@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>AFP</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/js/uikit-icons.min.js"></script>
+
+        <!-- extras -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script th:src="@{/assets/js/vueplotly.js}"></script>
+
+    </head>
+
+    <body class="uk-container">
+
+        <div id="app">
+
+            <div >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Año</th>
+                            <th>Mes</th>
+                            <th>Afp</th>
+                            <th>Fondo</th>
+                            <th>Rent. del Mes</th>
+                            <th>Rent. Acum. del año</th>
+                            <th>Rent. Acum. Anual</th>
+                            <th>Rent. Prom. Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="x in data">
+                            <td>{{x.year}}</td>
+                            <td>{{x.month}}</td>
+                            <td>{{x.afp}}</td>
+                            <td>{{x.fondo}}</td>
+                            <td>{{x.rateMonth}}</td>
+                            <td>{{x.rateAcumThisYear}}</td>
+                            <td>{{x.rateAcumFullYear}}</td>
+                            <td>{{x.rateAverageTotal}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!--</div>-->
+
+        <script th:src="@{/assets/js/utils.js}"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', toggleMenu);
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    serv: getCtx() + "/api/data/",
+                    data: []
+                },
+                created: function () {
+//                    $.get(this.serv + "all").done((x) => {
+//                        this.data = x;
+//                    });
+                },
+                methods: {
+                }
+
+            });
+
+        </script>
+    </body>
+
+</html>

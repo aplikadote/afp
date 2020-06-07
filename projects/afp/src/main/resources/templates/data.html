@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>AFP</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+        <!-- Demo Dependencies -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.js" type="text/javascript"></script>
+        <script>
+            Holder.addTheme("white", {
+                bg: "#fff",
+                fg: "#a7a7a7",
+                size: 10
+            });
+        </script>
+
+        <!-- keen-analysis@3 -->
+        <!--<script src="https://cdn.jsdelivr.net/npm/keen-analysis@3/dist/keen-analysis.min.js" type="text/javascript"></script>-->
+
+        <!-- keen-dataviz@3 -->
+        <link href="https://cdn.jsdelivr.net/npm/keen-dataviz@3/dist/keen-dataviz.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/keen-dataviz@3/dist/keen-dataviz.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" type="text/css" href="assets/css/keen-dashboards.css" />
+
+        <!-- extras -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script th:src="@{/assets/js/vueplotly.js}"></script>
+
+    </head>
+
+    <body class="keen-dashboard">
+
+        <div th:replace="brand"></div>
+
+        <!--<div id="app" class="container grid grid-hero-sidebar">-->
+        <div id="app" class="container">
+
+            <div class="chart-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Año</th>
+                            <th>Mes</th>
+                            <th>Afp</th>
+                            <th>Fondo</th>
+                            <th>Rent. del Mes</th>
+                            <th>Rent. Acum. del año</th>
+                            <th>Rent. Acum. Anual</th>
+                            <th>Rent. Prom. Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="x : ${data}">
+                            <td th:text="${x.year}"></td>
+                            <td th:text="${x.month}"></td>
+                            <td th:text="${x.afp}"></td>
+                            <td th:text="${x.fondo}"></td>
+                            <td th:text="${x.rateMonth}"></td>
+                            <td th:text="${x.rateAcumThisYear}"></td>
+                            <td th:text="${x.rateAcumFullYear}"></td>
+                            <td th:text="${x.rateAverageTotal}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+<!--                <table>
+                    <thead>
+                        <tr>
+                            <th>Año</th>
+                            <th>Mes</th>
+                            <th>Afp</th>
+                            <th>Fondo</th>
+                            <th>Rent. del Mes</th>
+                            <th>Rent. Acum. del año</th>
+                            <th>Rent. Acum. Anual</th>
+                            <th>Rent. Prom. Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="x in data">
+                            <td>{{x.year}}</td>
+                            <td>{{x.month}}</td>
+                            <td>{{x.afp}}</td>
+                            <td>{{x.fondo}}</td>
+                            <td>{{x.rateMonth}}</td>
+                            <td>{{x.rateAcumThisYear}}</td>
+                            <td>{{x.rateAcumFullYear}}</td>
+                            <td>{{x.rateAverageTotal}}</td>
+                        </tr>
+                    </tbody>
+                </table>-->
+            </div>
+
+        </div>
+        <!--</div>-->
+
+        <script th:src="@{/assets/js/utils.js}"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', toggleMenu);
+
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    serv: getCtx() + "/api/data/",
+                    data: []
+                },
+                created: function () {
+//                    $.get(this.serv + "all").done((x) => {
+//                        this.data = x;
+//                    });
+                },
+                methods: {
+                }
+
+            });
+
+        </script>
+    </body>
+
+</html>

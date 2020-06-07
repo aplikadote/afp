@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cl.rgonzalez.afp</groupId>
-    <artifactId>afp</artifactId>
+    <artifactId>afpcore</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>afp</name>
+    <name>afpcore</name>
     
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -21,16 +21,6 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         
@@ -40,19 +30,8 @@
         </dependency>  
         
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-        
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>cl.rgonzalez.afp</groupId>
-            <artifactId>afpcalculator</artifactId>
-            <version>1.0</version>
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/org.json/json -->
@@ -64,18 +43,5 @@
         
     </dependencies>
     
-    <build>
-        <finalName>afp</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 
 </project>
