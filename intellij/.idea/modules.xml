@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../projects/afp/afp.iml" filepath="$PROJECT_DIR$/../projects/afp/afp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../projects/afpcore/afpcore.iml" filepath="$PROJECT_DIR$/../projects/afpcore/afpcore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fae.iml" filepath="$PROJECT_DIR$/fae.iml" />
+    </modules>
+  </component>
+</project>

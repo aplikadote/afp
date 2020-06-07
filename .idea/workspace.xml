@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="101126cb-a28b-48c0-a274-1403d395d2ac" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/rest/AppRestAnualPromedio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/rest/AppRestData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/afp/src/main/resources/templates/analisisAnualPromedio.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/afp/src/main/resources/templates/data.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/afp/src/main/resources/templates/dataPromedio.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/projects/afp/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200508.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200509.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200510.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200511.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200512.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200601.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200602.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200603.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200604.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200605.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200606.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200607.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200608.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200609.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200610.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200611.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200612.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200701.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200702.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200703.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200704.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200705.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200706.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200707.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200708.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200709.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200710.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200711.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200712.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200801.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200802.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200803.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200804.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200805.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200806.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200807.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200808.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200809.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200810.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200811.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200812.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200901.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200902.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200903.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200904.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200905.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200906.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200907.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200908.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200909.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200910.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200911.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/200912.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201001.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201002.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201003.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201004.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201005.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201006.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201007.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201008.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201009.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201010.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201011.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201012.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201101.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201102.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201103.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201104.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201105.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201106.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201107.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201108.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201109.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201110.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201111.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201112.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201201.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201202.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201203.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201204.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201205.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201206.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201207.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201208.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201209.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201210.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201211.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201212.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201301.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201302.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201303.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201304.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201305.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201306.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201307.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201308.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201309.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201310.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201311.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201312.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201401.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201402.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201403.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201404.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201405.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201406.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201407.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201408.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201409.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201410.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201411.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201412.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201501.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201502.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201503.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201504.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201505.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201506.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201507.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201508.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201509.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201510.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201511.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201512.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201601.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201602.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201603.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201604.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201605.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201606.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201607.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201608.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201609.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201610.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201611.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201612.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201701.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201702.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201703.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201704.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201705.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201706.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201707.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201708.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201709.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201710.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201711.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201712.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201801.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201802.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201803.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201804.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201805.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201806.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201807.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201808.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201809.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201810.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201811.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201812.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201901.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201902.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201903.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201904.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201905.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201906.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201907.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201908.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201909.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201910.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201911.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/201912.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/202001.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/202002.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/202003.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/afp.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/nbactions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/nbactions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppAfp.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/AppAfp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppFondo.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/AppFondo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppMonth.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/AppMonth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppRestAnualAfp.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/rest/AppRestAnualAfp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppRestAnualFondo.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/rest/AppRestAnualFondo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppRestMensualAfp.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/rest/AppRestMensualAfp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppRestMensualFondo.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/rest/AppRestMensualFondo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/AppServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/AppYear.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/AppYear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/BrowserRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/utils/BrowserRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/ui/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/java/cl/rgonzalez/afp/utils/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/resources/application-dev.properties" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/resources/application-dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/resources/application-prod.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/resources/static/assets/css/keen-dashboards.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/resources/static/assets/css/keen-static.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/resources/static/assets/img/bg-bars.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/resources/static/assets/js/keen-analytics.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/resources/static/files/test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/afp/src/main/resources/templates/brand.html" beforeDir="false" afterPath="$PROJECT_DIR$/projects/afp/src/main/resources/templates/brand.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/afp_data_extractor_by_month.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script/readme" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/readme" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1cygNfhOU7iUUsctkFOVmxDR0B3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="101126cb-a28b-48c0-a274-1403d395d2ac" name="Default Changelist" comment="" />
+      <created>1591506208749</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591506208749</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="739" y="261" key="FileChooserDialogImpl" timestamp="1591506256476">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591506256476" />
+    <state x="342" y="140" key="new project wizard" timestamp="1591506261989">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="342" y="140" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1591506261989" />
+  </component>
+</project>

@@ -16,6 +16,7 @@ public class App {
     public CommandLineRunner demo() {
         return (args) -> {
             System.out.println("oliwi");
+            System.out.println("mas oliwi");
         };
     }
 
