@@ -5,10 +5,10 @@
  */
 package cl.rgonzalez.afp;
 
-import cl.rgonzalez.afp.db.DbAfpRepo;
+import cl.cgs.suitermes.afpcore.db.DbAfpRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import cl.rgonzalez.afp.db.DbDataRepo;
+import cl.cgs.suitermes.afpcore.db.DbDataRepo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 

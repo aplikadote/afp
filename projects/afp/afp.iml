@@ -79,7 +79,7 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.3.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.3.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.12" level="project" />
-    <orderEntry type="library" name="Maven: cl.rgonzalez.afp:afpcalculator:1.0" level="project" />
+    <orderEntry type="module" module-name="afpcore" />
     <orderEntry type="library" name="Maven: org.json:json:20200518" level="project" />
   </component>
 </module>
