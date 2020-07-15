@@ -25,33 +25,75 @@
 
         <div id="app">
 
-            <div >
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Año</th>
-                            <th>Mes</th>
-                            <th>Afp</th>
-                            <th>Fondo</th>
-                            <th>Rent. del Mes</th>
-                            <th>Rent. Acum. del año</th>
-                            <th>Rent. Acum. Anual</th>
-                            <th>Rent. Prom. Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="x in data">
-                            <td>{{x.year}}</td>
-                            <td>{{x.month}}</td>
-                            <td>{{x.afp}}</td>
-                            <td>{{x.fondo}}</td>
-                            <td>{{x.rateMonth}}</td>
-                            <td>{{x.rateAcumThisYear}}</td>
-                            <td>{{x.rateAcumFullYear}}</td>
-                            <td>{{x.rateAverageTotal}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <br><br>
+
+            <div>
+                <div class="uk-margin">
+                    Afp
+                    <select class="uk-select uk-width-small" v-model="selectedAfp">
+                        <option v-for="x in afps" v-bind:value="x">
+                            {{ x.name }}
+                        </option>
+                    </select>
+
+                    Fondo
+                    <select class="uk-select uk-width-small" v-model="selectedFondo">
+                        <option v-for="x in fondos" v-bind:value="x">
+                            {{ x.name }}
+                        </option>
+                    </select>
+
+                    Inicio
+                    <select class="uk-select uk-width-small" v-model="selectedInicio">
+                        <option v-for="x in periodos" v-bind:value="x">
+                            {{ periodoToStr(x) }}
+                        </option>
+                    </select>
+
+                    Fin
+                    <select class="uk-select uk-width-small" v-model="selectedFin">
+                        <option v-for="x in periodos" v-bind:value="x">
+                            {{ periodoToStr(x) }}
+                        </option>
+                    </select>
+
+
+                    <a class="uk-button uk-button-default" v-on:click="buscar">
+                        Buscar 
+                    </a>
+                </div>
+
+                <div class="chart-stage">
+                    <plotly-graph 
+                        style="width:100%;height:280px;" 
+                        v-bind:data="plot.data" 
+                        v-bind:layout="plot.layout" 
+                        v-bind:options="plot.options" 
+                        v-bind:div-name="plot.divName"
+                        >
+                    </plotly-graph>
+                </div>
+
+                <div>
+                    <table class="uk-table">
+                        <thead>
+                            <tr>
+                                <th>Afp</th>
+                                <th>Fondo</th>
+                                <th>Periodo</th>
+                                <th>Rentabilidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="x in data">
+                                <td>{{x.afp.name}}</td>
+                                <td>{{x.fondo.name}}</td>
+                                <td>{{ periodoToStr(x.periodo) }}</td>
+                                <td>{{(x.rateMonth*100).toFixed(2)}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
@@ -59,23 +101,125 @@
 
         <script th:src="@{/assets/js/utils.js}"></script>
         <script>
-            window.addEventListener('DOMContentLoaded', toggleMenu);
 
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    serv: getCtx() + "/api/data/",
-                    data: []
-                },
-                created: function () {
-//                    $.get(this.serv + "all").done((x) => {
-//                        this.data = x;
-//                    });
-                },
-                methods: {
-                }
+var app = new Vue({
+    el: '#app',
+    data: {
+        serv: getCtx() + "/api/data/",
+        afps: [],
+        fondos: [],
+        periodos: [],
+        rentabilidad: [],
+        data: [],
+        selectedAfp: {},
+        selectedFondo: {},
+        selectedInicio: {},
+        selectedFin: {},
+        plot: {}
+    },
+    created: function () {
+        $.get(this.serv + "afps").done((x) => {
+            this.afps = x;
+            this.selectedAfp = this.afps[0];
+
+            $.get(this.serv + "fondos").done((x) => {
+                this.fondos = x;
+                this.selectedFondo = x[0];
+
+                $.get(this.serv + "periodos").done((x) => {
+                    this.periodos = x;
+                    this.selectedInicio = this.periodos[0];
+                    this.selectedFin = this.periodos[0];
+
+                    $.get(this.serv + "rentabilidad").done((x) => {
+                        this.rentabilidad = x;
+                    });
+                });
 
             });
+        });
+
+    },
+    methods: {
+        buscar: function () {
+//            debugger;
+            var v1 = this.periodoToInt(this.selectedInicio);
+            var v2 = this.periodoToInt(this.selectedFin);
+            if (v1 > v2) {
+                return;
+            }
+
+            var filter = this.rentabilidad.filter(r => {
+                return r.afp.name === this.selectedAfp.name && r.fondo.name === this.selectedFondo.name;
+            });
+
+            filter = filter.filter(r => {
+                var p1 = this.periodoToInt(this.selectedInicio);
+                var p2 = this.periodoToInt(this.selectedFin);
+                var p = this.periodoToInt(r.periodo);
+                return p1 <= p && p <= p2;
+            });
+
+            filter.sort((r1, r2) => {
+                var v1 = this.periodoToInt(r1.periodo);
+                var v2 = this.periodoToInt(r2.periodo);
+                return v1 - v2;
+            });
+
+            this.data = filter;
+
+            var xData = [];
+            var yData = [];
+            for (var i = 0; i < this.data.length; i++) {
+                var r = this.data[i];
+                xData.push(this.periodoToStr(r.periodo));
+                yData.push(r.rateMonth);
+            }
+
+            this.plot = {
+                divName: "afp",
+                plotName: "afp",
+                data: [{
+                        x: xData,
+                        y: yData,
+                        type: "line",
+//                    text:[],
+                        textposition: "auto",
+                        hoverinfo: "none",
+                    }],
+                layout: {
+                    title: "afp",
+                    showLeyend: false,
+                    margin: {
+                        l: 20,
+                        r: 20,
+                        b: 20,
+                        t: 20,
+                        pad: 4
+                    },
+                    yaxis: {
+                        tickformat: ",.2%"
+                    },
+                    font: {
+                        size: 9
+                    }
+
+                },
+                options: {
+//                    staticPlot: true
+                }
+            };
+        },
+        periodoToStr: function (p) {
+            var aux = p.month < 10 ? "0" + p.month : p.month;
+            return p.year + "-" + aux;
+        },
+        periodoToInt: function (p) {
+            return p.year * 100 + p.month;
+        }
+    }
+
+});
 
         </script>
     </body>

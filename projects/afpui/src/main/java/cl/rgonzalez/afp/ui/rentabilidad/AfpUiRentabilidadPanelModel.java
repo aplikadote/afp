@@ -117,10 +117,10 @@ public class AfpUiRentabilidadPanelModel {
         comboPeriodoInicio.setRenderer(comboRendererPeriodo);
         comboPeriodoFin.setRenderer(comboRendererPeriodo);
 
-        service.findAllAfp().forEach(comboAfp::addItem);
-        service.findAllFondo().forEach(comboFondo::addItem);
-        service.findAllPeriodosSorted().forEach(comboPeriodoInicio::addItem);
-        service.findAllPeriodosSorted().forEach(comboPeriodoFin::addItem);
+        service.findAfpAll().forEach(comboAfp::addItem);
+        service.findFondoAll().forEach(comboFondo::addItem);
+        service.findPeriodosSortedAll().forEach(comboPeriodoInicio::addItem);
+        service.findPeriodosSortedAll().forEach(comboPeriodoFin::addItem);
 
         this.table.setModel(tableModel);
         this.table.setDefaultRenderer(AfpUiRentabilidadRow.class, tableRenderer);

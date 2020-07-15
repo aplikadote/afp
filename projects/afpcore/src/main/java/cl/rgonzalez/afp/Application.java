@@ -34,7 +34,7 @@ public class Application {
             LOG.info("======================================");
 
             starter.start(new File("../../data/"));
-            service.findAllAfp().forEach(System.out::println);
+            service.findAfpAll().forEach(System.out::println);
         };
     }
 

@@ -24,8 +24,10 @@ import cl.rgonzalez.afp.core.db.AfpDbFondoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbInfoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbPeriodoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbRentabilidadRepo;
+import javax.transaction.Transactional;
 
 @Service
+@Transactional
 public class AfpCoreService {
 
     @Autowired
@@ -43,11 +45,11 @@ public class AfpCoreService {
         return null;
     }
 
-    public List<AfpDbPeriodo> findAllPeriodos() {
+    public List<AfpDbPeriodo> findPeriodosAll() {
         return repoPeriodo.findAll();
     }
 
-    public List<AfpDbPeriodo> findAllPeriodosSorted() {
+    public List<AfpDbPeriodo> findPeriodosSortedAll() {
         List<AfpDbPeriodo> periodos = repoPeriodo.findAll();
         Collections.sort(periodos, new Comparator<AfpDbPeriodo>() {
             @Override
@@ -59,12 +61,16 @@ public class AfpCoreService {
         return periodos;
     }
 
-    public List<AfpDbAfp> findAllAfp() {
+    public List<AfpDbAfp> findAfpAll() {
         return repoAfp.findAll();
     }
 
-    public List<AfpDbFondo> findAllFondo() {
+    public List<AfpDbFondo> findFondoAll() {
         return repoFondo.findAll();
+    }
+    
+     public List<AfpDbRentabilidad> findRentabilidadAll() {
+        return repoRentabilidad.findAll();
     }
 
     public List<AfpDbRentabilidad> findRentabilidadBy(AfpDbPeriodo periodo) {

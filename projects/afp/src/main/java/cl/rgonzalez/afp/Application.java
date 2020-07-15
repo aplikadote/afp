@@ -7,17 +7,18 @@ package cl.rgonzalez.afp;
 
 import cl.rgonzalez.afp.core.services.AfpCoreService;
 import cl.rgonzalez.afp.core.services.AfpCoreStarter;
+import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import java.io.File;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
 
 @ComponentScan(basePackages = {"cl.rgonzalez.afp.core", "cl.rgonzalez.afp.web"})
 @EntityScan(basePackages = {"cl.rgonzalez.afp.core.db"})

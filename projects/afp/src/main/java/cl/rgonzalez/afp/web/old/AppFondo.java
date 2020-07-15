@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.rgonzalez.afp.web;
+package cl.rgonzalez.afp.web.old;
 
 import java.util.Objects;
 
@@ -11,18 +11,18 @@ import java.util.Objects;
  *
  * @author aplik
  */
-public class AppAfp implements Comparable<AppAfp> {
+public class AppFondo implements Comparable<AppFondo> {
 
-    public static final AppAfp EMPTY = new AppAfp();
+    public static final AppFondo EMPTY = new AppFondo();
     private int id;
     private String name;
 
-    public AppAfp() {
+    public AppFondo() {
         this.id = -1;
         this.name = "";
     }
 
-    public AppAfp(int id, String name) {
+    public AppFondo(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -53,7 +53,7 @@ public class AppAfp implements Comparable<AppAfp> {
     }
 
     @Override
-    public int compareTo(AppAfp o) {
+    public int compareTo(AppFondo o) {
         return id - o.id;
     }
 }

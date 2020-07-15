@@ -26,7 +26,7 @@ public class Test01 {
         System.out.println("----------------------");
         System.out.println("TEST");
         System.out.println("----------------------");
-        service.findAllAfp().forEach(System.out::println);
+        service.findAfpAll().forEach(System.out::println);
     }
 
 }

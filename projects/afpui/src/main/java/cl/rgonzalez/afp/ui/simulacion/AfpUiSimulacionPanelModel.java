@@ -97,9 +97,9 @@ public class AfpUiSimulacionPanelModel {
         comboPeriodoInicio.setRenderer(comboRendererPeriodo);
         comboPeriodoFin.setRenderer(comboRendererPeriodo);
 
-        service.findAllAfp().forEach(comboAfp::addItem);
-        service.findAllFondo().forEach(comboFondo::addItem);
-        service.findAllPeriodosSorted().forEach(e -> {
+        service.findAfpAll().forEach(comboAfp::addItem);
+        service.findFondoAll().forEach(comboFondo::addItem);
+        service.findPeriodosSortedAll().forEach(e -> {
             comboPeriodoInicio.addItem(e);
             comboPeriodoFin.addItem(e);
         });
