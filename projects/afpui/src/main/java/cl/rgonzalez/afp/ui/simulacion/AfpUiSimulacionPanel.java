@@ -68,6 +68,10 @@ public class AfpUiSimulacionPanel extends javax.swing.JPanel {
     public JPanel getPanelTableButtons() {
         return panelTableButtons;
     }
+
+    public JTextField getTextComision() {
+        return textComision;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,6 +96,8 @@ public class AfpUiSimulacionPanel extends javax.swing.JPanel {
         comboPeriodoFin = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         textCotizacion = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        textComision = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         textTasaFija = new javax.swing.JTextField();
         buttonCalcular = new javax.swing.JButton();
@@ -149,6 +155,13 @@ public class AfpUiSimulacionPanel extends javax.swing.JPanel {
         textCotizacion.setColumns(6);
         textCotizacion.setText("30000");
         panelButtons.add(textCotizacion);
+
+        jLabel8.setText("Comision");
+        panelButtons.add(jLabel8);
+
+        textComision.setColumns(5);
+        textComision.setText("3000");
+        panelButtons.add(textComision);
 
         jLabel6.setText("Tasa Fija");
         panelButtons.add(jLabel6);
@@ -235,6 +248,7 @@ public class AfpUiSimulacionPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel panelButtons;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelPlot;
@@ -246,6 +260,7 @@ public class AfpUiSimulacionPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane scrollTable;
     private javax.swing.JSplitPane split;
     private javax.swing.JTable table;
+    private javax.swing.JTextField textComision;
     private javax.swing.JTextField textCotizacion;
     private javax.swing.JTextField textTasaFija;
     // End of variables declaration//GEN-END:variables

@@ -14,6 +14,8 @@ import cl.rgonzalez.afp.core.services.AfpCoreServiceException;
 import cl.rgonzalez.afp.ui.AfpUiComboAfpRenderer;
 import cl.rgonzalez.afp.ui.AfpUiComboFondoRenderer;
 import cl.rgonzalez.afp.ui.AfpUiComboPeriodoRenderer;
+import cl.rgonzalez.afp.ui.AfpUiTableRendererAfpDbPeriodo;
+import cl.rgonzalez.afp.ui.AfpUiTableRendererDouble;
 import java.awt.Color;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -51,7 +53,9 @@ public class AfpUiSimulacionPanelModel {
     @Autowired
     AfpUiSimulacionTableModel tableModel;
     @Autowired
-    AfpUiSimulacionTableRenderer tableRenderer;
+    AfpUiTableRendererAfpDbPeriodo tableRendererPeriodo;
+    @Autowired
+    AfpUiTableRendererDouble tableRendererDouble;
     //
     private JComboBox comboAfp;
     private JComboBox comboFondo;
@@ -62,6 +66,7 @@ public class AfpUiSimulacionPanelModel {
     private JButton buttonCalcular;
     private JTextField textCotizacion;
     private JTextField textTasaFija;
+    private JTextField textComision;
     private JPanel panelPlot;
     private DefaultCategoryDataset dataset;
     private List<AfpUiSimulacionRow> rows;
@@ -81,6 +86,7 @@ public class AfpUiSimulacionPanelModel {
         this.textCotizacion = panel.getTextCotizacion();
         this.textTasaFija = panel.getTextTasaFija();
         this.panelPlot = panel.getPanelPlot();
+        this.textComision = panel.getTextComision();
 
         comboAfp.removeAllItems();
         comboFondo.removeAllItems();
@@ -105,7 +111,8 @@ public class AfpUiSimulacionPanelModel {
         });
 
         table.setModel(tableModel);
-        table.setDefaultRenderer(AfpUiSimulacionRow.class, tableRenderer);
+        table.setDefaultRenderer(AfpDbPeriodo.class, tableRendererPeriodo);
+        table.setDefaultRenderer(Double.class, tableRendererDouble);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         int n = table.getColumnCount();
         for (int i = 0; i < n; i++) {
@@ -183,6 +190,12 @@ public class AfpUiSimulacionPanelModel {
             return;
         }
 
+        String strComision = textComision.getText();
+        if (strComision.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese comision", "Informacion", 1);
+            return;
+        }
+
         String strTasaFija = textTasaFija.getText();
         if (strTasaFija.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese Tasa Fija", "Informacion", 1);
@@ -196,9 +209,20 @@ public class AfpUiSimulacionPanelModel {
                 JOptionPane.showMessageDialog(null, "Ingrese cotizacion mayor que cero", "Error", 0);
                 return;
             }
-
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Error de parseo en cotizacion", "Error", 0);
+            return;
+        }
+
+        double comision = 0;
+        try {
+            comision = service.parseDbl(strComision);
+            if (cotizacion <= 0) {
+                JOptionPane.showMessageDialog(null, "Ingrese comision mayor que cero", "Error", 0);
+                return;
+            }
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Error de parseo en comision", "Error", 0);
             return;
         }
 
@@ -240,9 +264,9 @@ public class AfpUiSimulacionPanelModel {
                 double ganancia = pozo * tasaVariable;
                 accumAfp = pozo + ganancia;
 
-                accumNone = accumNone + cotizacion;
+                accumNone = accumNone + cotizacion + comision;
 
-                pozo = accumTasaFija + cotizacion;
+                pozo = accumTasaFija + cotizacion + comision;
                 ganancia = pozo * tasaFija;
                 accumTasaFija = pozo + ganancia;
 

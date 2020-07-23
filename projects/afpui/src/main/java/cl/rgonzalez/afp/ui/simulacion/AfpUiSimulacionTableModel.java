@@ -5,6 +5,7 @@
  */
 package cl.rgonzalez.afp.ui.simulacion;
 
+import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
 import cl.rgonzalez.afp.core.services.AfpCoreService;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +42,24 @@ public class AfpUiSimulacionTableModel extends AbstractTableModel {
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        return AfpUiSimulacionRow.class;
+        switch (columnIndex) {
+            case 0:
+                return AfpDbPeriodo.class;
+            case 1:
+                return Double.class;
+            case 2:
+                return Double.class;
+            case 3:
+                return Double.class;
+            case 4:
+                return Double.class;
+            case 5:
+                return Double.class;
+            case 6:
+                return Double.class;
+            default:
+                return String.class;
+        }
     }
 
     @Override
@@ -52,7 +70,24 @@ public class AfpUiSimulacionTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         AfpUiSimulacionRow r = rows.get(rowIndex);
-        return r;
+        switch (columnIndex) {
+            case 0:
+                return r.getPeriodo();
+            case 1:
+                return r.getTasaAfp();
+            case 2:
+                return r.getTotalAfp();
+            case 3:
+                return r.getTasaNone();
+            case 4:
+                return r.getTotalNone();
+            case 5:
+                return r.getTasaFija();
+            case 6:
+                return r.getTotalFija();
+            default:
+                return "";
+        }
     }
 
 }
