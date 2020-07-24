@@ -40,7 +40,7 @@ public class AfpCoreService {
     AfpDbAfpRepo repoAfp;
     @Autowired
     AfpDbFondoRepo repoFondo;
-    
+
     public File[] getAllRentabilidadFiles() {
         return null;
     }
@@ -68,8 +68,8 @@ public class AfpCoreService {
     public List<AfpDbFondo> findFondoAll() {
         return repoFondo.findAll();
     }
-    
-     public List<AfpDbRentabilidad> findRentabilidadAll() {
+
+    public List<AfpDbRentabilidad> findRentabilidadAll() {
         return repoRentabilidad.findAll();
     }
 
@@ -136,6 +136,18 @@ public class AfpCoreService {
     public double parseDbl(String strCotizacion) throws ParseException {
         DecimalFormat df = new DecimalFormat("#.#");
         return df.parse(strCotizacion).doubleValue();
+    }
+
+    public AfpDbPeriodo findPeriodoById(int id) {
+        return repoPeriodo.findById(id).orElse(null);
+    }
+
+    public AfpDbAfp findAfpById(int id) {
+        return repoAfp.findById(id).orElse(null);
+    }
+
+    public AfpDbFondo findFondoById(int id) {
+        return repoFondo.findById(id).orElse(null);
     }
 
 }

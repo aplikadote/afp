@@ -10,7 +10,12 @@ import cl.rgonzalez.afp.core.db.AfpDbFondo;
 import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
 import cl.rgonzalez.afp.core.db.AfpDbRentabilidad;
 import cl.rgonzalez.afp.core.services.AfpCoreService;
+import cl.rgonzalez.afp.core.services.AfpCoreServiceException;
+import cl.rgonzalez.afp.core.services.AfpCoreSimulacionService;
+import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceData;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +25,8 @@ public class AfpApi {
 
     @Autowired
     AfpCoreService service;
+    @Autowired
+    AfpCoreSimulacionService simulation;
 
     @GetMapping("/api/data/afps")
     public List<AfpDbAfp> getAfps() {
@@ -30,7 +37,7 @@ public class AfpApi {
     public List<AfpDbFondo> getFondos() {
         return service.findFondoAll();
     }
-    
+
     @GetMapping("/api/data/periodos")
     public List<AfpDbPeriodo> getPeriodos() {
         return service.findPeriodosSortedAll();
@@ -39,5 +46,45 @@ public class AfpApi {
     @GetMapping("/api/data/rentabilidad")
     public List<AfpDbRentabilidad> getRentabilidad() {
         return service.findRentabilidadAll();
+    }
+
+    @GetMapping("/api/data/db")
+    public Object getDb() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("afps", service.findAfpAll());
+        map.put("fondos", service.findFondoAll());
+        map.put("periodos", service.findPeriodosSortedAll());
+        map.put("rentabilidad", service.findRentabilidadAll());
+        return map;
+    }
+
+    @GetMapping("/api/simulate")
+    public Object simular(AfpApiSimulateData data) throws AfpCoreServiceException {
+        AfpDbAfp afp = service.findAfpById(data.getAfp());
+        AfpDbFondo fondo = service.findFondoById(data.getFondo());
+        AfpDbPeriodo periodoInicio = service.findPeriodoById(data.getInicio());
+        AfpDbPeriodo periodoFin = service.findPeriodoById(data.getFin());
+
+//        System.out.println("afp: " + afp);
+//        System.out.println("fondo: " + fondo);
+//        System.out.println("inicio: " + periodoInicio);
+//        System.out.println("fin: " + periodoFin);
+//        System.out.println("cotizacion: " + data.getCotizacion());
+//        System.out.println("comision: " + data.getComision());
+//        System.out.println("tasa: " + data.getTasaFija());
+
+        simulation.setAfp(afp);
+        simulation.setFondo(fondo);
+        simulation.setPeriodoInicio(periodoInicio);
+        simulation.setPeriodoFin(periodoFin);
+        simulation.setCotizacion(data.getCotizacion());
+        simulation.setComision(data.getComision());
+        simulation.setTasaFija(data.getTasaFija());
+
+        List<AfpCoreSimulacionServiceData> result = simulation.simulate();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", result);
+        return map;
     }
 }

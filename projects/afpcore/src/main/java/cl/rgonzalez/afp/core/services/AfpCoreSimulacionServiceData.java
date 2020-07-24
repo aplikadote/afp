@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.rgonzalez.afp.ui.simulacion;
+package cl.rgonzalez.afp.core.services;
 
 import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
 
@@ -11,7 +11,7 @@ import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
  *
  * @author rgonzalez
  */
-public class AfpUiSimulacionRow {
+public class AfpCoreSimulacionServiceData {
 
     private AfpDbPeriodo periodo;
     private double tasaAfp;

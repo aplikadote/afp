@@ -5,6 +5,7 @@
  */
 package cl.rgonzalez.afp.ui.simulacion;
 
+import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceData;
 import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
 import cl.rgonzalez.afp.core.services.AfpCoreService;
 import java.util.Arrays;
@@ -20,13 +21,13 @@ public class AfpUiSimulacionTableModel extends AbstractTableModel {
     AfpCoreService service;
     //
     List<String> columnNames = Arrays.asList("Periodo", "Tasa Afp", "Total Afp", "Sin Tasa", "Total Sin Tasa", "Tasa Fija", "Total Tasa Fija");
-    List<AfpUiSimulacionRow> rows;
+    List<AfpCoreSimulacionServiceData> rows;
 
-    public List<AfpUiSimulacionRow> getRows() {
+    public List<AfpCoreSimulacionServiceData> getRows() {
         return rows;
     }
 
-    public void setRows(List<AfpUiSimulacionRow> rows) {
+    public void setRows(List<AfpCoreSimulacionServiceData> rows) {
         this.rows = rows;
     }
 
@@ -69,7 +70,7 @@ public class AfpUiSimulacionTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        AfpUiSimulacionRow r = rows.get(rowIndex);
+        AfpCoreSimulacionServiceData r = rows.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return r.getPeriodo();

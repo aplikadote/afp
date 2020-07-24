@@ -5,12 +5,13 @@
  */
 package cl.rgonzalez.afp.ui.simulacion;
 
+import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceData;
 import cl.rgonzalez.afp.core.db.AfpDbAfp;
 import cl.rgonzalez.afp.core.db.AfpDbFondo;
 import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
-import cl.rgonzalez.afp.core.db.AfpDbRentabilidad;
 import cl.rgonzalez.afp.core.services.AfpCoreService;
 import cl.rgonzalez.afp.core.services.AfpCoreServiceException;
+import cl.rgonzalez.afp.core.services.AfpCoreSimulacionService;
 import cl.rgonzalez.afp.ui.AfpUiComboAfpRenderer;
 import cl.rgonzalez.afp.ui.AfpUiComboFondoRenderer;
 import cl.rgonzalez.afp.ui.AfpUiComboPeriodoRenderer;
@@ -18,9 +19,7 @@ import cl.rgonzalez.afp.ui.AfpUiTableRendererAfpDbPeriodo;
 import cl.rgonzalez.afp.ui.AfpUiTableRendererDouble;
 import java.awt.Color;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -56,6 +55,8 @@ public class AfpUiSimulacionPanelModel {
     AfpUiTableRendererAfpDbPeriodo tableRendererPeriodo;
     @Autowired
     AfpUiTableRendererDouble tableRendererDouble;
+    @Autowired
+    AfpCoreSimulacionService simulation;
     //
     private JComboBox comboAfp;
     private JComboBox comboFondo;
@@ -69,7 +70,7 @@ public class AfpUiSimulacionPanelModel {
     private JTextField textComision;
     private JPanel panelPlot;
     private DefaultCategoryDataset dataset;
-    private List<AfpUiSimulacionRow> rows;
+    private List<AfpCoreSimulacionServiceData> rows;
     private int elements;
     private int pages;
     private int pagination = 20;
@@ -239,49 +240,15 @@ public class AfpUiSimulacionPanelModel {
         }
 
         try {
-            List<AfpDbRentabilidad> rentabilidadList = service.findRentabilidadBy(afp, fondo, periodoInicio, periodoFin);
-            if (rentabilidadList.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Sin datos", "Informacion", 1);
-                return;
-            }
+            simulation.setAfp(afp);
+            simulation.setFondo(fondo);
+            simulation.setPeriodoInicio(periodoInicio);
+            simulation.setPeriodoFin(periodoFin);
+            simulation.setCotizacion(cotizacion);
+            simulation.setComision(comision);
+            simulation.setTasaFija(tasaFija);
 
-            rentabilidadList.sort(new Comparator<AfpDbRentabilidad>() {
-                @Override
-                public int compare(AfpDbRentabilidad o1, AfpDbRentabilidad o2) {
-                    int p1 = service.formatPeriodoInt(o1.getPeriodo());
-                    int p2 = service.formatPeriodoInt(o2.getPeriodo());
-                    return Integer.compare(p1, p2);
-                }
-            });
-
-            rows = new ArrayList<>();
-            double accumAfp = 0;
-            double accumNone = 0;
-            double accumTasaFija = 0;
-            for (AfpDbRentabilidad obj : rentabilidadList) {
-                Double tasaVariable = obj.getRateMonth();
-                double pozo = accumAfp + cotizacion;
-                double ganancia = pozo * tasaVariable;
-                accumAfp = pozo + ganancia;
-
-                accumNone = accumNone + cotizacion + comision;
-
-                pozo = accumTasaFija + cotizacion + comision;
-                ganancia = pozo * tasaFija;
-                accumTasaFija = pozo + ganancia;
-
-                AfpUiSimulacionRow row = new AfpUiSimulacionRow();
-                row.setPeriodo(obj.getPeriodo());
-                row.setTasaAfp(tasaVariable);
-                row.setTotalAfp(accumAfp);
-                row.setTasaNone(0);
-                row.setTotalNone(accumNone);
-                row.setTasaFija(tasaFija);
-                row.setTotalFija(accumTasaFija);
-
-                rows.add(row);
-            }
-
+            rows = simulation.simulate();
             tableModel.setRows(rows);
             tableModel.fireTableDataChanged();
 
@@ -298,6 +265,10 @@ public class AfpUiSimulacionPanelModel {
                 comboPagination.addItem(i + 1);
             }
 
+            if (rows.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Sin datos", "Informacion", 1);
+            }
+
         } catch (AfpCoreServiceException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 0);
         }
@@ -309,7 +280,7 @@ public class AfpUiSimulacionPanelModel {
         int init = page * pagination;
         for (int i = init; i < init + pagination; i++) {
             if (i < elements) {
-                AfpUiSimulacionRow row = rows.get(i);
+                AfpCoreSimulacionServiceData row = rows.get(i);
                 dataset.addValue(row.getTotalAfp(), "AFP", service.formatPeriodo(row.getPeriodo()));
                 dataset.addValue(row.getTotalNone(), "NN", service.formatPeriodo(row.getPeriodo()));
                 dataset.addValue(row.getTotalFija(), "FIJA", service.formatPeriodo(row.getPeriodo()));

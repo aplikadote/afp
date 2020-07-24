@@ -65,7 +65,7 @@
 
                 <div class="chart-stage">
                     <plotly-graph 
-                        style="width:100%;height:280px;" 
+                        style="width:100%;height:480px;" 
                         v-bind:data="plot.data" 
                         v-bind:layout="plot.layout" 
                         v-bind:options="plot.options" 
@@ -184,25 +184,25 @@ var app = new Vue({
                         y: yData,
                         type: "line",
 //                    text:[],
-                        textposition: "auto",
-                        hoverinfo: "none",
+//                        textposition: "auto",
+//                        hoverinfo: "none",
                     }],
                 layout: {
                     title: "afp",
                     showLeyend: false,
-                    margin: {
-                        l: 20,
-                        r: 20,
-                        b: 20,
-                        t: 20,
-                        pad: 4
-                    },
+//                    margin: {
+//                        l: 20,
+//                        r: 20,
+//                        b: 20,
+//                        t: 20,
+//                        pad: 4
+//                    },
                     yaxis: {
                         tickformat: ",.2%"
                     },
-                    font: {
-                        size: 9
-                    }
+//                    font: {
+//                        size: 9
+//                    }
 
                 },
                 options: {
