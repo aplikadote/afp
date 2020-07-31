@@ -5,7 +5,9 @@
  */
 package cl.rgonzalez.afp.core.services;
 
-import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -13,70 +15,49 @@ import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
  */
 public class AfpCoreSimulacionServiceData {
 
-    private AfpDbPeriodo periodo;
-    private double tasaAfp;
+    private List<AfpCoreSimulacionServiceDataInterval> intervals = Collections.EMPTY_LIST;
     private double totalAfp;
-    private double tasaNone;
-    private double totalNone;
-    private double tasaFija;
-    private double totalFija;
+    private double totalBase;
+    private double totalFijo;
+    private double rentabilidadAfp;
+    private double rentabilidadFija;
 
-    public AfpDbPeriodo getPeriodo() {
-        return periodo;
+    public AfpCoreSimulacionServiceData() {
     }
 
-    public void setPeriodo(AfpDbPeriodo periodo) {
-        this.periodo = periodo;
+    public AfpCoreSimulacionServiceData(List<AfpCoreSimulacionServiceDataInterval> intervals) {
+        this.intervals = intervals;
+        
+        AfpCoreSimulacionServiceDataInterval last = intervals.get(intervals.size() - 1);
+        this.totalAfp = last.getTotalAfp();
+        this.totalBase = last.getTotalNone();
+        this.totalFijo = last.getTotalFija();
+        this.rentabilidadAfp = (totalAfp - totalBase) / totalBase;
+        this.rentabilidadFija = (totalFijo - totalBase) / totalBase;
     }
 
-    public double getTasaAfp() {
-        return tasaAfp;
-    }
-
-    public void setTasaAfp(double tasaAfp) {
-        this.tasaAfp = tasaAfp;
+    public List<AfpCoreSimulacionServiceDataInterval> getIntervals() {
+        return intervals;
     }
 
     public double getTotalAfp() {
         return totalAfp;
     }
 
-    public void setTotalAfp(double totalAfp) {
-        this.totalAfp = totalAfp;
+    public double getTotalBase() {
+        return totalBase;
     }
 
-    public double getTasaNone() {
-        return tasaNone;
+    public double getTotalFijo() {
+        return totalFijo;
     }
 
-    public void setTasaNone(double tasaNone) {
-        this.tasaNone = tasaNone;
+    public double getRentabilidadAfp() {
+        return rentabilidadAfp;
     }
 
-    public double getTotalNone() {
-        return totalNone;
+    public double getRentabilidadFija() {
+        return rentabilidadFija;
     }
-
-    public void setTotalNone(double totalNone) {
-        this.totalNone = totalNone;
-    }
-
-    public double getTasaFija() {
-        return tasaFija;
-    }
-
-    public void setTasaFija(double tasaFija) {
-        this.tasaFija = tasaFija;
-    }
-
-    public double getTotalFija() {
-        return totalFija;
-    }
-
-    public void setTotalFija(double totalFija) {
-        this.totalFija = totalFija;
-    }
-    
-    
 
 }

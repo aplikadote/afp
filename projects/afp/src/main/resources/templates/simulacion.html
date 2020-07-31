@@ -29,88 +29,126 @@
 
             <div class="uk-card uk-card-default">
                 <div class="uk-card-header">
-                    <h3 class="uk-card-title">Simulacion</h3>
+                    <h3 class="uk-card-title">Simulacion AFP</h3>
                 </div>    
                 <div class="uk-card-body">
-                    <div class="uk-margin">
-                        Afp
-                        <select class="uk-select uk-width-small" v-model="selectedAfp">
-                            <option v-for="x in afps" v-bind:value="x">
-                                {{ x.name }}
-                            </option>
-                        </select>
+                    <form class="uk-form-horizontal uk-margin-large">
 
-                        Fondo
-                        <select class="uk-select uk-width-small" v-model="selectedFondo">
-                            <option v-for="x in fondos" v-bind:value="x">
-                                {{ x.name }}
-                            </option>
-                        </select>
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Afp</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select uk-width-small" v-model="selectedAfp">
+                                    <option v-for="x in afps" v-bind:value="x">
+                                        {{ x.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
 
-                        Inicio
-                        <select class="uk-select uk-width-small" v-model="selectedInicio">
-                            <option v-for="x in periodos" v-bind:value="x">
-                                {{ periodoToStr(x) }}
-                            </option>
-                        </select>
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Fondo</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select uk-width-small" v-model="selectedFondo">
+                                    <option v-for="x in fondos" v-bind:value="x">
+                                        {{ x.name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
 
-                        Fin
-                        <select class="uk-select uk-width-small" v-model="selectedFin">
-                            <option v-for="x in periodos" v-bind:value="x">
-                                {{ periodoToStr(x) }}
-                            </option>
-                        </select>
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Periodo</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select uk-width-small" v-model="selectedInicio">
+                                    <option v-for="x in periodos" v-bind:value="x">
+                                        {{ periodoToStr(x) }}
+                                    </option>
+                                </select>
+                                -
+                                <select class="uk-select uk-width-small" v-model="selectedFin">
+                                    <option v-for="x in periodos" v-bind:value="x">
+                                        {{ periodoToStr(x) }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
 
-                    </div>
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Cotizacion</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input uk-width-small" type="text" value="30000" v-model="cotizacion">
+                            </div>
+                        </div>
 
-                    <div class="uk-margin">
-                        Cotizacion
-                        <input class="uk-input uk-width-small" type="text" value="30000" v-model="cotizacion">
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Comision</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input uk-width-small" type="text" value="3000" v-model="comision">
+                            </div>
+                        </div>
 
-                        Comision
-                        <input class="uk-input uk-width-small" type="text" value="3000" v-model="comision">
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-horizontal-text">Tasa Fija</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input uk-width-small" type="text" value="0.002" v-model="tasaFija">
+                                (Tasa fija para comporar, por ejemplo, deposito a plazo) 
+                            </div>
+                        </div>
 
-                        Tasa Fija (*)
-                        <input class="uk-input uk-width-small" type="text" value="0.002" v-model="tasaFija">
+                        <div class="uk-margin">
+                            <!--                            <label class="uk-form-label" for="form-horizontal-text">Tasa Fija (*)</label>
+                                                        <div class="uk-form-controls">
+                                                            <input class="uk-input uk-width-small" type="text" value="0.002" v-model="tasaFija">
+                                                        </div>-->
+                            <a class="uk-button uk-button-default uk-button-primary" v-on:click="simular">
+                                Simular 
+                            </a>
+                        </div>
 
-                        <a class="uk-button uk-button-default" v-on:click="simular">
-                            Simular 
-                        </a>
-                    </div>
+                    </form>
 
-                    <div class="uk-margin">
-                        (*) Tasa fija comparativa, por ejemplo, deposito a plazo
-                    </div>
-
-                    <table class="uk-table">
+                    <table class="uk-table uk-table-small uk-table-striped">
+                        <caption>Resumen</caption>
                         <thead>
                             <tr>
-                                <th>Periodo</th>
-                                <th>Tasa Afp</th>
-                                <th>Total Fondo</th>
-                                <th>Tasa cero</th>
-                                <th>Total Tasa Cero</th>
-                                <th>Tasa Fija</th>
+                                <th>Total Base</th>
+                                <th>Total AFP</th>
                                 <th>Total Tasa Fija</th>
+                                <th>Rentabilidad AFP</th>
+                                <th>Rentabilidad Tasa Fija</th>
                             </tr>
                         </thead>
                         <tbody>
-<!--                             private AfpDbPeriodo periodo;
-    private double tasaAfp;
-    private double totalAfp;
-    private double tasaNone;
-    private double totalNone;
-    private double tasaFija;
-    private double totalFija;-->
-                            
-                            <tr v-for="x in data">
+                            <tr>
+                                <td>{{ data.totalBase.toFixed(0) }}</td>
+                                <td>{{ data.totalAfp.toFixed(0) }}</td>
+                                <td>{{ data.totalFijo.toFixed(0) }}</td>
+                                <td>{{ (data.rentabilidadAfp*100).toFixed(2) }}%</td>
+                                <td>{{ (data.rentabilidadFija*100).toFixed(2) }}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br>
+
+                    <table class="uk-table uk-table-small uk-table-striped">
+                        <caption>Detalle</caption>
+                        <thead>
+                            <tr>
+                                <th>Periodo</th>
+                                <th>Acum. Base</th>
+                                <th>Tasa Afp</th>
+                                <th>Acum. Afp</th>
+                                <th>Acum. Tasa Fija</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="x in data.intervals">
                                 <td>{{ periodoToStr(x.periodo) }}</td>
-                                <td>{{x.tasaAfp}}</td>
-                                <td>{{x.totalAfp}}</td>
-                                <td>{{x.tasaNone}}</td>
-                                <td>{{x.totalNone}}</td>
-                                <td>{{x.tasaFija}}</td>
-                                <td>{{x.totalFija}}</td>
+                                <td>{{ x.totalNone }}</td>
+                                <td>{{ (x.tasaAfp*100).toFixed(2) }}%</td>
+                                <td>{{ x.totalAfp.toFixed(0) }}</td>
+                                <td>{{ x.totalFija.toFixed(0) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -123,6 +161,12 @@
         <script th:src="@{/assets/js/utils.js}"></script>
         <script>
 
+
+
+
+
+
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -130,7 +174,7 @@ var app = new Vue({
         fondos: [],
         periodos: [],
         rentabilidad: [],
-        data: [],
+        data: {intervals: [], totalAfp: 0.0, totalBase: 0.0, totalFijo: 0.0, rentabilidadAfp: 0.0, rentabilidadFija: 0.0},
         selectedAfp: {},
         selectedFondo: {},
         selectedInicio: {},
@@ -142,20 +186,35 @@ var app = new Vue({
     created: function () {
         $.get(getCtx() + "/api/data/db").done((x) => {
             this.afps = x.afps;
-            this.selectedAfp = this.afps[0];
+
+            for (var i = 0; i < this.afps.length; i++) {
+                var afp = this.afps[i];
+                if (afp.name === 'PROMEDIO') {
+                    this.selectedAfp = afp;
+                    break;
+                }
+            }
 
             this.fondos = x.fondos;
             this.selectedFondo = this.fondos[0];
 
             this.periodos = x.periodos;
             this.selectedInicio = this.periodos[0];
-            this.selectedFin = this.periodos[0];
+            this.selectedFin = this.periodos[this.periodos.length - 1];
 
             this.rentabilidad = x.rentabilidad;
         });
     },
     methods: {
         simular: function () {
+
+            var p1 = this.periodoToInt(this.selectedInicio);
+            var p2 = this.periodoToInt(this.selectedFin);
+            if (p2 <= p1) {
+                UIkit.notification({timeout: 1000, message: 'Seleccione un periodo valido', status: 'warning'});
+                return;
+            }
+
             var data = {
                 afp: this.selectedAfp.id,
                 fondo: this.selectedFondo.id,

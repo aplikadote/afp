@@ -47,7 +47,8 @@ public class Application {
         return (args) -> {
             WebLookAndFeel.install();
             
-            starter.start(new File("../../data"));
+//            starter.start(new File("../../data"));
+            starter.start();
             
             EventQueue.invokeLater(() -> {
                 frame.init();

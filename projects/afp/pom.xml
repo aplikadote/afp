@@ -1,80 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cl.rgonzalez.afp</groupId>
-    <artifactId>afp</artifactId>
-    <version>1.0</version>
-    <packaging>jar</packaging>
-
-    <name>afp</name>
-    
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
-        <relativePath/>
-    </parent>
-    
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">  
+    <modelVersion>4.0.0</modelVersion>  
+    <groupId>cl.rgonzalez.afp</groupId>  
+    <artifactId>afp</artifactId>  
+    <version>1.0</version>  
+    <packaging>jar</packaging>  
+    <name>afp</name>  
+    <parent> 
+        <groupId>org.springframework.boot</groupId>  
+        <artifactId>spring-boot-starter-parent</artifactId>  
+        <version>2.3.0.RELEASE</version>  
+        <relativePath/> 
+    </parent>  
+    <dependencies> 
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-web</artifactId> 
         </dependency>  
-        
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>cl.rgonzalez.afp</groupId>
-            <artifactId>afpcore</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20200518</version>
-        </dependency>
-
-    </dependencies>
-    
-    <build>
-        <finalName>afp</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-thymeleaf</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-data-jpa</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>com.h2database</groupId>  
+            <artifactId>h2</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-devtools</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.projectlombok</groupId>  
+            <artifactId>lombok</artifactId> 
+        </dependency>  
+        <dependency> 
+            <groupId>cl.rgonzalez.afp</groupId>  
+            <artifactId>afpcore</artifactId>  
+            <version>1.0</version> 
+        </dependency>  
+        <dependency> 
+            <groupId>org.json</groupId>  
+            <artifactId>json</artifactId>  
+            <version>20200518</version> 
+        </dependency> 
+    </dependencies>  
+    <build> 
+        <finalName>afp</finalName>  
+        <plugins> 
+<!--            <plugin> 
+                <groupId>org.springframework.boot</groupId>  
+                <artifactId>spring-boot-maven-plugin</artifactId>  
+                <configuration> 
+                    <executable>true</executable> 
+                </configuration> 
+            </plugin>  -->
+            <plugin> 
+                <groupId>org.springframework.boot</groupId>  
+                <artifactId>spring-boot-maven-plugin</artifactId> 
+            </plugin> 
+            <plugin> 
+                <groupId>com.microsoft.azure</groupId>  
+                <artifactId>azure-webapp-maven-plugin</artifactId>  
+                <version>1.9.1</version>  
                 <configuration>
-                    <executable>true</executable>
+                    <schemaVersion>V2</schemaVersion>
+                    <resourceGroup>afp-1596179075608-rg</resourceGroup>
+                    <appName>afp-1596179075608</appName>
+                    <pricingTier>P1v2</pricingTier>
+                    <region>westeurope</region>
+                    <runtime>
+                        <os>linux</os>
+                        <javaVersion>jre8</javaVersion>
+                        <webContainer>jre8</webContainer>
+                    </runtime>
+          
+                    <!-- Begin of App Settings  -->
+                    <appSettings>
+                        <property>
+                            <name>JAVA_OPTS</name>
+                            <value>-Dserver.port=80</value>
+                        </property>
+                    </appSettings>
+                    <!-- End of App Settings  -->
+          
+                    <deployment>
+                        <resources>
+                            <resource>
+                                <directory>${project.basedir}/target</directory>
+                                <includes>
+                                    <include>*.jar</include>
+                                </includes>
+                            </resource>
+                        </resources>
+                    </deployment>
                 </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-
+            </plugin> 
+        </plugins> 
+    </build> 
 </project>

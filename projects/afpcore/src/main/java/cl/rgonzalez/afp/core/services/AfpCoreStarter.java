@@ -5,7 +5,6 @@
  */
 package cl.rgonzalez.afp.core.services;
 
-
 import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,12 +22,15 @@ public class AfpCoreStarter {
     public AfpCoreStarter() {
     }
 
-    public void start(File rootDir) {
-        System.out.println("=====================================");
-        System.out.println(rootDir);
-        System.out.println("=====================================");
+//    public void start(File rootDir) {
+    public void start() {
+//        System.out.println("=====================================");
+//        System.out.println(rootDir);
+//        System.out.println("=====================================");
 
-        readerRentabilidad.readAndSave(new File(rootDir, "rentabilidad"));
+//        readerRentabilidad.readAndSave(new File(rootDir, "rentabilidad"));
+        readerRentabilidad.readAndSave();
+
     }
 
 }

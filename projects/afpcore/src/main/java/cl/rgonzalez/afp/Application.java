@@ -33,7 +33,8 @@ public class Application {
             LOG.info("DBSTART");
             LOG.info("======================================");
 
-            starter.start(new File("../../data/"));
+//            starter.start(new File("../../data/"));
+            starter.start();
             service.findAfpAll().forEach(System.out::println);
         };
     }

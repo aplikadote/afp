@@ -5,13 +5,14 @@
  */
 package cl.rgonzalez.afp.ui.simulacion;
 
-import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceData;
+import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceDataInterval;
 import cl.rgonzalez.afp.core.db.AfpDbAfp;
 import cl.rgonzalez.afp.core.db.AfpDbFondo;
 import cl.rgonzalez.afp.core.db.AfpDbPeriodo;
 import cl.rgonzalez.afp.core.services.AfpCoreService;
 import cl.rgonzalez.afp.core.services.AfpCoreServiceException;
 import cl.rgonzalez.afp.core.services.AfpCoreSimulacionService;
+import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceData;
 import cl.rgonzalez.afp.ui.AfpUiComboAfpRenderer;
 import cl.rgonzalez.afp.ui.AfpUiComboFondoRenderer;
 import cl.rgonzalez.afp.ui.AfpUiComboPeriodoRenderer;
@@ -70,7 +71,7 @@ public class AfpUiSimulacionPanelModel {
     private JTextField textComision;
     private JPanel panelPlot;
     private DefaultCategoryDataset dataset;
-    private List<AfpCoreSimulacionServiceData> rows;
+    private List<AfpCoreSimulacionServiceDataInterval> rows;
     private int elements;
     private int pages;
     private int pagination = 20;
@@ -248,7 +249,8 @@ public class AfpUiSimulacionPanelModel {
             simulation.setComision(comision);
             simulation.setTasaFija(tasaFija);
 
-            rows = simulation.simulate();
+            AfpCoreSimulacionServiceData data = simulation.simulate();
+            rows = data.getIntervals();
             tableModel.setRows(rows);
             tableModel.fireTableDataChanged();
 
@@ -280,7 +282,7 @@ public class AfpUiSimulacionPanelModel {
         int init = page * pagination;
         for (int i = init; i < init + pagination; i++) {
             if (i < elements) {
-                AfpCoreSimulacionServiceData row = rows.get(i);
+                AfpCoreSimulacionServiceDataInterval row = rows.get(i);
                 dataset.addValue(row.getTotalAfp(), "AFP", service.formatPeriodo(row.getPeriodo()));
                 dataset.addValue(row.getTotalNone(), "NN", service.formatPeriodo(row.getPeriodo()));
                 dataset.addValue(row.getTotalFija(), "FIJA", service.formatPeriodo(row.getPeriodo()));

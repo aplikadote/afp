@@ -43,7 +43,8 @@ public class Application {
             LOG.info("======================================");
             LOG.info("DBSTART");
             LOG.info("======================================");
-            starter.start(new File("../../data/"));
+//            starter.start(new File("../../data/"));
+            starter.start();
         };
     }
 }

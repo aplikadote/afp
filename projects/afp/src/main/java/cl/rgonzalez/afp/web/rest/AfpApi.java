@@ -13,6 +13,7 @@ import cl.rgonzalez.afp.core.services.AfpCoreService;
 import cl.rgonzalez.afp.core.services.AfpCoreServiceException;
 import cl.rgonzalez.afp.core.services.AfpCoreSimulacionService;
 import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceData;
+import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceDataInterval;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,11 +60,11 @@ public class AfpApi {
     }
 
     @GetMapping("/api/simulate")
-    public Object simular(AfpApiSimulateData data) throws AfpCoreServiceException {
-        AfpDbAfp afp = service.findAfpById(data.getAfp());
-        AfpDbFondo fondo = service.findFondoById(data.getFondo());
-        AfpDbPeriodo periodoInicio = service.findPeriodoById(data.getInicio());
-        AfpDbPeriodo periodoFin = service.findPeriodoById(data.getFin());
+    public Object simular(AfpApiSimulateInput input) throws AfpCoreServiceException {
+        AfpDbAfp afp = service.findAfpById(input.getAfp());
+        AfpDbFondo fondo = service.findFondoById(input.getFondo());
+        AfpDbPeriodo periodoInicio = service.findPeriodoById(input.getInicio());
+        AfpDbPeriodo periodoFin = service.findPeriodoById(input.getFin());
 
 //        System.out.println("afp: " + afp);
 //        System.out.println("fondo: " + fondo);
@@ -72,19 +73,17 @@ public class AfpApi {
 //        System.out.println("cotizacion: " + data.getCotizacion());
 //        System.out.println("comision: " + data.getComision());
 //        System.out.println("tasa: " + data.getTasaFija());
-
         simulation.setAfp(afp);
         simulation.setFondo(fondo);
         simulation.setPeriodoInicio(periodoInicio);
         simulation.setPeriodoFin(periodoFin);
-        simulation.setCotizacion(data.getCotizacion());
-        simulation.setComision(data.getComision());
-        simulation.setTasaFija(data.getTasaFija());
+        simulation.setCotizacion(input.getCotizacion());
+        simulation.setComision(input.getComision());
+        simulation.setTasaFija(input.getTasaFija());
 
-        List<AfpCoreSimulacionServiceData> result = simulation.simulate();
-
+        AfpCoreSimulacionServiceData data = simulation.simulate();
         Map<String, Object> map = new HashMap<>();
-        map.put("data", result);
+        map.put("data", data);
         return map;
     }
 }

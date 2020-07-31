@@ -9,7 +9,7 @@ package cl.rgonzalez.afp.web.rest;
  *
  * @author rgonzalez
  */
-public class AfpApiSimulateData {
+public class AfpApiSimulateInput {
 
     private int afp;
     private int fondo;
@@ -19,7 +19,7 @@ public class AfpApiSimulateData {
     private double comision;
     private double tasaFija;
 
-    public AfpApiSimulateData() {
+    public AfpApiSimulateInput() {
     }
 
     public int getInicio() {

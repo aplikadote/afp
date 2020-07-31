@@ -29,6 +29,9 @@ import cl.rgonzalez.afp.core.db.AfpDbFondoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbInfoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbPeriodoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbRentabilidadRepo;
+import java.io.InputStream;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 @Service
 public class AfpCoreRentabilidadReader {
@@ -45,6 +48,8 @@ public class AfpCoreRentabilidadReader {
     AfpDbPeriodoRepo repoPeriod;
     @Autowired
     AfpDbInfoRepo repoInfo;
+    @Autowired
+    ResourceLoader resourceLoader;
     //
     private DecimalFormat df;
 
@@ -54,18 +59,43 @@ public class AfpCoreRentabilidadReader {
         this.df = new DecimalFormat("0.00%", dfs);
     }
 
-    public void readAndSave(File rentabilidadDir) {
-        System.out.println("=====================================");
-        System.out.println(rentabilidadDir);
-        System.out.println("=====================================");
+//    public void readAndSave(File rentabilidadDir) {
+    public void readAndSave() {
+//        System.out.println("=====================================");
+//        System.out.println(rentabilidadDir);
+//        System.out.println("=====================================");
 
         try {
             int[] yearLimits = new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE};
             int[] monthLimits = new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE};
 
-            for (File file : rentabilidadDir.listFiles()) {
-                LOG.info("  archivo: " + file.getName());
+            List<Resource> resources = new ArrayList<>();
+            for (int j = 8; j <= 12; j++) {
+                String mm = j < 10 ? "0" + j : Integer.toString(j);
+                String file = "2005" + mm + ".json";
+                Resource resource = resourceLoader.getResource("classpath:/rentabilidad/" + file);
+                resources.add(resource);
+            }
 
+            boolean exit = false;
+            for (int i = 2006; i < 2100 && !exit; i++) {
+                for (int j = 1; j <= 12 && !exit; j++) {
+                    String mm = j < 10 ? "0" + j : Integer.toString(j);
+                    String file = i + "" + mm + ".json";
+                    Resource resource = resourceLoader.getResource("classpath:/rentabilidad/" + file);
+                    if (resource.exists()) {
+                        resources.add(resource);
+                    } else {
+                        exit = true;
+                    }
+                }
+            }
+
+//            for (File file : rentabilidadDir.listFiles()) {
+            for (Resource r : resources) {
+                LOG.info("  archivo: " + r.getFilename());
+
+                File file = r.getFile();
                 String str = new String(Files.readAllBytes(file.toPath()));
                 JSONObject json = new JSONObject(str);
 

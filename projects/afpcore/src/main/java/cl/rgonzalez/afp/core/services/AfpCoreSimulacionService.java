@@ -29,12 +29,12 @@ public class AfpCoreSimulacionService {
     private double comision;
     private double tasaFija;
 
-    public List<AfpCoreSimulacionServiceData> simulate() throws AfpCoreServiceException {
-        List<AfpCoreSimulacionServiceData> list = new ArrayList<>();
+    public AfpCoreSimulacionServiceData simulate() throws AfpCoreServiceException {
+        List<AfpCoreSimulacionServiceDataInterval> list = new ArrayList<>();
 
         List<AfpDbRentabilidad> rentabilidadList = service.findRentabilidadBy(afp, fondo, periodoInicio, periodoFin);
         if (rentabilidadList.isEmpty()) {
-            return list;
+            return new AfpCoreSimulacionServiceData();
         }
 
         rentabilidadList.sort(new Comparator<AfpDbRentabilidad>() {
@@ -61,7 +61,7 @@ public class AfpCoreSimulacionService {
             ganancia = pozo * tasaFija;
             accumTasaFija = pozo + ganancia;
 
-            AfpCoreSimulacionServiceData row = new AfpCoreSimulacionServiceData();
+            AfpCoreSimulacionServiceDataInterval row = new AfpCoreSimulacionServiceDataInterval();
             row.setPeriodo(obj.getPeriodo());
             row.setTasaAfp(tasaVariable);
             row.setTotalAfp(accumAfp);
@@ -72,7 +72,8 @@ public class AfpCoreSimulacionService {
 
             list.add(row);
         }
-        return list;
+
+        return new AfpCoreSimulacionServiceData(list);
     }
 
     public AfpDbAfp getAfp() {
