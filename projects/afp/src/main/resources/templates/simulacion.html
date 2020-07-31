@@ -175,7 +175,6 @@ var app = new Vue({
         afps: [],
         fondos: [],
         periodos: [],
-        rentabilidad: [],
         data: {intervals: [], totalAfp: 0.0, totalBase: 0.0, totalFijo: 0.0, rentabilidadAfp: 0.0, rentabilidadFija: 0.0},
         selectedAfp: {},
         selectedFondo: {},
@@ -186,7 +185,7 @@ var app = new Vue({
         tasaFija: 0.002
     },
     created: function () {
-        $.get(getCtx() + "/api/data/db").done((x) => {
+        $.get(getCtx() + "/api/data/db2").done((x) => {
             this.afps = x.afps;
 
             for (var i = 0; i < this.afps.length; i++) {
@@ -203,8 +202,6 @@ var app = new Vue({
             this.periodos = x.periodos;
             this.selectedInicio = this.periodos[0];
             this.selectedFin = this.periodos[this.periodos.length - 1];
-
-            this.rentabilidad = x.rentabilidad;
         });
     },
     methods: {

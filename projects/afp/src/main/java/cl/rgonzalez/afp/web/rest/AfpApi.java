@@ -58,6 +58,15 @@ public class AfpApi {
         map.put("rentabilidad", service.findRentabilidadAll());
         return map;
     }
+    
+    @GetMapping("/api/data/db2")
+    public Object getDb2() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("afps", service.findAfpAll());
+        map.put("fondos", service.findFondoAll());
+        map.put("periodos", service.findPeriodosSortedAll());
+        return map;
+    }
 
     @GetMapping("/api/simulate")
     public Object simular(AfpApiSimulateInput input) throws AfpCoreServiceException {
