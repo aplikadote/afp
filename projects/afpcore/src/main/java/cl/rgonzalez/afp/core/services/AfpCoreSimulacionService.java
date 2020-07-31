@@ -30,8 +30,6 @@ public class AfpCoreSimulacionService {
     private double tasaFija;
 
     public AfpCoreSimulacionServiceData simulate() throws AfpCoreServiceException {
-        List<AfpCoreSimulacionServiceDataInterval> list = new ArrayList<>();
-
         List<AfpDbRentabilidad> rentabilidadList = service.findRentabilidadBy(afp, fondo, periodoInicio, periodoFin);
         if (rentabilidadList.isEmpty()) {
             return new AfpCoreSimulacionServiceData();
@@ -46,6 +44,7 @@ public class AfpCoreSimulacionService {
             }
         });
 
+        List<AfpCoreSimulacionServiceDataInterval> list = new ArrayList<>();
         double accumAfp = 0;
         double accumNone = 0;
         double accumTasaFija = 0;

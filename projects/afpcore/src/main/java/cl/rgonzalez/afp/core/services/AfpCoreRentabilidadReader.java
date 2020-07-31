@@ -29,7 +29,9 @@ import cl.rgonzalez.afp.core.db.AfpDbFondoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbInfoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbPeriodoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbRentabilidadRepo;
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
@@ -95,9 +97,17 @@ public class AfpCoreRentabilidadReader {
             for (Resource r : resources) {
                 LOG.info("  archivo: " + r.getFilename());
 
-                File file = r.getFile();
-                String str = new String(Files.readAllBytes(file.toPath()));
-                JSONObject json = new JSONObject(str);
+                StringBuilder sb = new StringBuilder();
+                InputStream is = r.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String line = "";
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+
+//                String str = new String(Files.readAllBytes(file.toPath()));
+//                JSONObject json = new JSONObject(str);
+                JSONObject json = new JSONObject(sb.toString());
 
                 String yearStr = json.getString("year");
                 String monthStr = json.getString("month");
