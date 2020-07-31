@@ -6,7 +6,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: afp-1596179075608    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: './projects/afp'      # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_PACKAGE_PATH: 'projects/afp'      # set this to the path to your web app project, defaults to the repository root
   JAVA_VERSION: '1.8'                # set this to the Java version to use
   AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}     # set GH repo secret with the publish profile of the web app
 
