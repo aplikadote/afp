@@ -71,6 +71,8 @@
                                         {{ periodoToStr(x) }}
                                     </option>
                                 </select>
+                                
+                                (El periodo de existencia de cada afp varia, excepto para PROMEDIO)
                             </div>
                         </div>
 
@@ -112,16 +114,17 @@
                         <caption>Resumen</caption>
                         <thead>
                             <tr>
+                                <th>Periodo Efectivo</th>
                                 <th>Total Base</th>
                                 <th>Total AFP</th>
                                 <th>Total Tasa Fija</th>
-                                <th>Rentabilidad AFP</th>
-                                <th>Rentabilidad Tasa Fija</th>
+                                <th>Rent. AFP</th>
+                                <th>Rent. Tasa Fija</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
                             <tr>
+                                <td>{{ periodoEfectivo }}</td>
                                 <td>{{ formatMoney(data.totalBase) }}</td>
                                 <td>{{ formatMoney(data.totalAfp) }}</td>
                                 <td>{{ formatMoney(data.totalFijo) }}</td>
@@ -182,7 +185,8 @@ var app = new Vue({
         selectedFin: {},
         cotizacion: 30000,
         comision: 3000,
-        tasaFija: 0.002
+        tasaFija: 0.002,
+        periodoEfectivo: ''
     },
     created: function () {
         $.get(getCtx() + "/api/data/db2").done((x) => {
@@ -226,7 +230,10 @@ var app = new Vue({
 
             $.get(getCtx() + "/api/simulate", data).done((x) => {
                 this.data = x.data;
-//                console.log(this.data);
+                var n = this.data.intervals.length;
+                var i0 = this.periodoToStr(this.data.intervals[0].periodo);
+                var i1 = this.periodoToStr(this.data.intervals[n-1].periodo);
+                this.periodoEfectivo = i0 + " " + i1;
             });
 
         },
