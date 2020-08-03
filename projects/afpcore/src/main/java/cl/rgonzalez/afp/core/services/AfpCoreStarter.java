@@ -5,7 +5,6 @@
  */
 package cl.rgonzalez.afp.core.services;
 
-import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +15,27 @@ public class AfpCoreStarter {
 
     private static final Logger LOG = LoggerFactory.getLogger(AfpCoreStarter.class);
 
+//    @Autowired
+//    AfpCoreRentabilidadReader readerRentabilidad;
     @Autowired
-    AfpCoreRentabilidadReader readerRentabilidad;
+    AfpCoreValorCuotaReader readerValorCuota;
 
     public AfpCoreStarter() {
     }
 
 //    public void start(File rootDir) {
     public void start() {
-//        System.out.println("=====================================");
+        try {
+            //        System.out.println("=====================================");
 //        System.out.println(rootDir);
 //        System.out.println("=====================================");
 
 //        readerRentabilidad.readAndSave(new File(rootDir, "rentabilidad"));
-        readerRentabilidad.readAndSave();
+//        readerValorCuota.readAndSave();
+            readerValorCuota.readAndSave();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 

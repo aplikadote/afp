@@ -107,7 +107,7 @@ public class AfpUiSimulacionPanelModel {
 
         service.findAfpAll().forEach(comboAfp::addItem);
         service.findFondoAll().forEach(comboFondo::addItem);
-        service.findPeriodosSortedAll().forEach(e -> {
+        service.findPeriodosAllSorted().forEach(e -> {
             comboPeriodoInicio.addItem(e);
             comboPeriodoFin.addItem(e);
         });

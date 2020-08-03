@@ -13,7 +13,6 @@ import cl.rgonzalez.afp.core.services.AfpCoreService;
 import cl.rgonzalez.afp.core.services.AfpCoreServiceException;
 import cl.rgonzalez.afp.core.services.AfpCoreSimulacionService;
 import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceData;
-import cl.rgonzalez.afp.core.services.AfpCoreSimulacionServiceDataInterval;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +40,7 @@ public class AfpApi {
 
     @GetMapping("/api/data/periodos")
     public List<AfpDbPeriodo> getPeriodos() {
-        return service.findPeriodosSortedAll();
+        return service.findPeriodosAllSorted();
     }
 
     @GetMapping("/api/data/rentabilidad")
@@ -54,7 +53,7 @@ public class AfpApi {
         Map<String, Object> map = new HashMap<>();
         map.put("afps", service.findAfpAll());
         map.put("fondos", service.findFondoAll());
-        map.put("periodos", service.findPeriodosSortedAll());
+        map.put("periodos", service.findPeriodosAllSorted());
         map.put("rentabilidad", service.findRentabilidadAll());
         return map;
     }
@@ -64,7 +63,7 @@ public class AfpApi {
         Map<String, Object> map = new HashMap<>();
         map.put("afps", service.findAfpAll());
         map.put("fondos", service.findFondoAll());
-        map.put("periodos", service.findPeriodosSortedAll());
+        map.put("periodos", service.findPeriodosAllSorted());
         return map;
     }
 

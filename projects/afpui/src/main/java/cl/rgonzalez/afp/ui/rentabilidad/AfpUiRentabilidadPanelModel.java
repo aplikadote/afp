@@ -119,8 +119,8 @@ public class AfpUiRentabilidadPanelModel {
 
         service.findAfpAll().forEach(comboAfp::addItem);
         service.findFondoAll().forEach(comboFondo::addItem);
-        service.findPeriodosSortedAll().forEach(comboPeriodoInicio::addItem);
-        service.findPeriodosSortedAll().forEach(comboPeriodoFin::addItem);
+        service.findPeriodosAllSorted().forEach(comboPeriodoInicio::addItem);
+        service.findPeriodosAllSorted().forEach(comboPeriodoFin::addItem);
 
         this.table.setModel(tableModel);
         this.table.setDefaultRenderer(AfpUiRentabilidadRow.class, tableRenderer);

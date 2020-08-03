@@ -38,7 +38,7 @@ import org.springframework.core.io.ResourceLoader;
 @Service
 public class AfpCoreRentabilidadReader {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AfpCoreStarter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AfpCoreRentabilidadReader.class);
 
     @Autowired
     AfpDbRentabilidadRepo repo;

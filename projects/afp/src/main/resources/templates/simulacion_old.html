@@ -38,7 +38,11 @@
                         <div class="uk-margin">
                             <label class="uk-form-label" for="form-horizontal-text">Afp</label>
                             <div class="uk-form-controls">
-                                PROMEDIO
+                                <select class="uk-select uk-width-small" v-model="selectedAfp">
+                                    <option v-for="x in afps" v-bind:value="x">
+                                        {{ x.name }}
+                                    </option>
+                                </select>
                             </div>
                         </div>
 
@@ -67,6 +71,8 @@
                                         {{ periodoToStr(x) }}
                                     </option>
                                 </select>
+                                
+                                (El periodo de existencia de cada afp varia, excepto para PROMEDIO)
                             </div>
                         </div>
 
@@ -169,9 +175,11 @@
 var app = new Vue({
     el: '#app',
     data: {
+        afps: [],
         fondos: [],
         periodos: [],
         data: {intervals: [], totalAfp: 0.0, totalBase: 0.0, totalFijo: 0.0, rentabilidadAfp: 0.0, rentabilidadFija: 0.0},
+        selectedAfp: {},
         selectedFondo: {},
         selectedInicio: {},
         selectedFin: {},
@@ -182,6 +190,16 @@ var app = new Vue({
     },
     created: function () {
         $.get(getCtx() + "/api/data/db2").done((x) => {
+            this.afps = x.afps;
+
+            for (var i = 0; i < this.afps.length; i++) {
+                var afp = this.afps[i];
+                if (afp.name === 'PROMEDIO') {
+                    this.selectedAfp = afp;
+                    break;
+                }
+            }
+
             this.fondos = x.fondos;
             this.selectedFondo = this.fondos[0];
 

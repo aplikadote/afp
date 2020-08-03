@@ -24,6 +24,9 @@ import cl.rgonzalez.afp.core.db.AfpDbFondoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbInfoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbPeriodoRepo;
 import cl.rgonzalez.afp.core.db.AfpDbRentabilidadRepo;
+import cl.rgonzalez.afp.core.db.AfpDbValorCuota;
+import cl.rgonzalez.afp.core.db.AfpDbValorCuotaRepo;
+import java.util.ArrayList;
 import javax.transaction.Transactional;
 
 @Service
@@ -40,6 +43,8 @@ public class AfpCoreService {
     AfpDbAfpRepo repoAfp;
     @Autowired
     AfpDbFondoRepo repoFondo;
+    @Autowired
+    AfpDbValorCuotaRepo repoValorCuota;
 
     public File[] getAllRentabilidadFiles() {
         return null;
@@ -49,7 +54,7 @@ public class AfpCoreService {
         return repoPeriodo.findAll();
     }
 
-    public List<AfpDbPeriodo> findPeriodosSortedAll() {
+    public List<AfpDbPeriodo> findPeriodosAllSorted() {
         List<AfpDbPeriodo> periodos = repoPeriodo.findAll();
         Collections.sort(periodos, new Comparator<AfpDbPeriodo>() {
             @Override
@@ -148,6 +153,26 @@ public class AfpCoreService {
 
     public AfpDbFondo findFondoById(int id) {
         return repoFondo.findById(id).orElse(null);
+    }
+
+    public List<AfpDbValorCuota> findValorCuotaAll(AfpDbFondo fondo, AfpDbPeriodo inicio, AfpDbPeriodo fin) throws AfpCoreServiceException {
+        checkRange(inicio, fin);
+
+        AfpDbValorCuota probe = new AfpDbValorCuota();
+        probe.setAfp(repoAfp.findByName("PROMEDIO"));
+        probe.setFondo(fondo);
+
+        List<AfpDbValorCuota> list = repoValorCuota.findAll(Example.of(probe));
+
+        List<AfpDbPeriodo> periodos = findPeriodosAllSorted();
+        List<AfpDbPeriodo> filtered = new ArrayList<>();
+        int from = periodos.indexOf(inicio);
+        int to = periodos.indexOf(fin);
+        for (int i = from; i < to; i++) {
+            filtered.add(periodos.get(i));
+        }
+        
+        return null;
     }
 
 }

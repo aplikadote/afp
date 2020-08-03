@@ -1,8 +1,11 @@
 package cl.rgonzalez.afp;
 
+import cl.rgonzalez.afp.core.db.AfpDbAfpRepo;
+import cl.rgonzalez.afp.core.db.AfpDbFondoRepo;
+import cl.rgonzalez.afp.core.db.AfpDbValorCuotaLimitesRepo;
+import cl.rgonzalez.afp.core.db.AfpDbValorCuotaRepo;
 import cl.rgonzalez.afp.core.services.AfpCoreService;
 import cl.rgonzalez.afp.core.services.AfpCoreStarter;
-import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +25,17 @@ public class Application {
 
     @Autowired
     AfpCoreStarter starter;
-
     @Autowired
     AfpCoreService service;
+    //
+    @Autowired
+    AfpDbValorCuotaRepo repoValorCuota;
+    @Autowired
+    AfpDbValorCuotaLimitesRepo repoValorCuotaLimites;
+    @Autowired
+    AfpDbAfpRepo repoAfp;
+    @Autowired
+    AfpDbFondoRepo repoFondo;
 
     @Bean
     public CommandLineRunner demo() {
@@ -35,7 +46,10 @@ public class Application {
 
 //            starter.start(new File("../../data/"));
             starter.start();
-            service.findAfpAll().forEach(System.out::println);
+            
+//            service.findAfpAll().forEach(System.out::println);
+//            service.findPeriodosAllSorted().forEach(System.out::println);
+            repoValorCuotaLimites.findAll().stream().forEach(System.out::println);
         };
     }
 
