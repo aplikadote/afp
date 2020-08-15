@@ -1,0 +1,35 @@
+name: Deploy Java Web App to Azure
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  AZURE_WEBAPP_NAME: afp-1596179075608    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: 'projects/afp'      # set this to the path to your web app project, defaults to the repository root
+  JAVA_VERSION: '1.8'                # set this to the Java version to use
+  AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}     # set GH repo secret with the publish profile of the web app
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ env.JAVA_VERSION }}
+    - name: Build with Maven Core
+      run: mvn install --file projects/afpcore/pom.xml
+    - name: Build with Maven App
+      run: mvn package --file projects/afp/pom.xml
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.jar'
