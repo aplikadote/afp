@@ -1,0 +1,28 @@
+---
+
+- hosts: uruk
+  vars: 
+    project_dir: '/home/guru/trabajo/afp'
+  tasks:
+  - name: 'Detener tomcat'
+    become: true
+    service:
+      name: tomcat8
+      state: stopped
+  - name: 'Actualizar'
+    git:
+      repo: 'https://github.com/aplikadote/afp.git'
+      dest: '{{project_dir}}'
+      clone: no
+  - name: 'Empaquetar'
+    shell: mvn -f {{project_dir}}/projects/pom.xml package -DskipTests    
+  - name: 'Borrar cache'
+    become: true
+    file:
+      path: '/var/cache/tomcat8/Catalina/localhost/fae'
+      state: absent
+  - name: 'Arrancar tomcat'
+    become: true
+    service:
+      name: tomcat8
+      state: started  
