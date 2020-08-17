@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>AFP</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/css/uikit.min.css" />
+
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.3/dist/js/uikit-icons.min.js"></script>
+
+        <!-- extras -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script th:src="@{/assets/js/vueplotly.js}"></script>
+        <script th:src="@{/assets/js/accounting.min.js}"></script>
+
+    </head>
+
+    <body class="uk-container">
+
+        <div id="app">
+
+            <br><br>
+
+            <div class="uk-card uk-card-default">
+                <div class="uk-card-header">
+                    <h3 class="uk-card-title">Inicio</h3>
+                </div>    
+                
+                <div class="uk-card-body">
+                    {{ message }}
+                </div>
+            </div>
+
+        </div>
+        <!--</div>-->
+
+        <script th:src="@{/assets/js/utils.js}"></script>
+        <script>
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'oliwi'
+    }
+
+});
+
+        </script>
+    </body>
+
+</html>

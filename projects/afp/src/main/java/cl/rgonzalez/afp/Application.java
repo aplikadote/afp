@@ -41,11 +41,10 @@ public class Application extends SpringBootServletInitializer {
     @Bean
     public CommandLineRunner demo() {
         return (args) -> {
-            LOG.info("======================================");
-            LOG.info("DBSTART");
-            LOG.info("======================================");
-//            starter.start(new File("../../data/"));
-            starter.start();
+//            LOG.info("======================================");
+//            LOG.info("DBSTART");
+//            LOG.info("======================================");
+//            starter.start();
         };
     }
 }
